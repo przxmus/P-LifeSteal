@@ -1,0 +1,38 @@
+# To these settings you can provide the following values:
+# ${chance} - Chance to add heart
+heartItem:
+  name: "&c&lExtra Heart"
+  lore:
+    - "&6Gives an extra heart!"
+    - "&7&oYou have ${chance} to get an additional heart added."
+  loseChance: 50 # Chance of losing heart at failure.
+
+banOn0Hearts: true # If true, player will be ip-banned if they have 0 hearts.
+broadcastBanFrom0Hearts: true # If true, there will be message visible to everyone that some player got banned.
+
+# INSERT YOUR DATA!
+# TEMPLATE:
+# loot:
+#   your_world_name_here:
+#     chanceForHeartToGenerate: number between 1 and 100
+#     heartAddChance: number between 1 and 100
+#   your_second_world_name_here:
+#     chanceForHeartToGenerate: number between 1 and 100
+#     heartAddChance: number between 1 and 100
+#   your_third_world_name_here:
+#     chanceForHeartToGenerate: number between 1 and 100
+#     heartAddChance: number between 1 and 100
+
+loot:
+  enabled: true # If false, loot will not be generated in structures chests.
+  world:
+    chanceForHeartToGenerate: 100
+    heartAddChance: 50
+
+messages:
+  heartReceived: "&a&lYou've received an extra heart!"
+  heartGained: "&a&lYou've gained a heart!"
+  heartFailure: "&4&lYou didn't get an extra heart."
+  heartLost: "&4&lYou've lost an heart."
+  noMoreHeartsBan: "&c&lYou've lost all your lives."
+  bannedNoMoreHeartsBroadcast: "&c&l${player} &4&lhas lost all his lives."
