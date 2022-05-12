@@ -60,55 +60,55 @@ public class LootPopulator extends BlockPopulator {
                 if (chunk.isLoaded()) {
                     int random = (int) (Math.random() * 100);
                     if (chunk.getWorld().getEnvironment() == World.Environment.NORMAL) {
-                        if (random <= 1) {
-                            inventory.addItem(Items.Heart.getHeartItem(47));
-                            return;
-                        }
-                        if (random <= 5) {
-                            inventory.addItem(Items.Heart.getHeartItem(30));
-                            return;
-                        }
-                        if (random <= 45) {
-                            inventory.addItem(Items.Heart.getHeartItem(5));
-                            return;
-                        }
+//                        if (random <= 1) {
+//                            inventory.addItem(Items.Heart.getHeartItem(47));
+//                            return;
+//                        }
+//                        if (random <= 5) {
+//                            inventory.addItem(Items.Heart.getHeartItem(30));
+//                            return;
+//                        }
+//                        if (random <= 45) {
+//                            inventory.addItem(Items.Heart.getHeartItem(5));
+//                            return;
+//                        }
                     } else if (chunk.getWorld().getEnvironment() == World.Environment.NETHER) {
-                        if (random <= 1) {
-                            inventory.addItem(Items.Heart.getHeartItem(70));
-                            return;
-                        }
-                        if (random <= 15) {
-                            inventory.addItem(Items.Heart.getHeartItem(50));
-                            return;
-                        }
-                        if (random <= 35) {
-                            inventory.addItem(Items.Heart.getHeartItem(30));
-                            return;
-                        }
-                        if (random <= 70) {
-                            inventory.addItem(Items.Heart.getHeartItem(5));
-                            return;
-                        }
+//                        if (random <= 1) {
+//                            inventory.addItem(Items.Heart.getHeartItem(70));
+//                            return;
+//                        }
+//                        if (random <= 15) {
+//                            inventory.addItem(Items.Heart.getHeartItem(50));
+//                            return;
+//                        }
+//                        if (random <= 35) {
+//                            inventory.addItem(Items.Heart.getHeartItem(30));
+//                            return;
+//                        }
+//                        if (random <= 70) {
+//                            inventory.addItem(Items.Heart.getHeartItem(5));
+//                            return;
+//                        }
                     } else if (chunk.getWorld().getEnvironment() == World.Environment.THE_END) {
-                        if (random <= 2) {
-                            inventory.addItem(Items.Heart.getHeartItem(100));
-                        }
-                        if (random <= 20) {
-                            inventory.addItem(Items.Heart.getHeartItem(70));
-                            return;
-                        }
-                        if (random <= 35) {
-                            inventory.addItem(Items.Heart.getHeartItem(50));
-                            return;
-                        }
-                        if (random <= 65) {
-                            inventory.addItem(Items.Heart.getHeartItem(30));
-                            return;
-                        }
-                        if (random <= 80) {
-                            inventory.addItem(Items.Heart.getHeartItem(5));
-                            return;
-                        }
+//                        if (random <= 2) {
+//                            inventory.addItem(Items.Heart.getHeartItem(100));
+//                        }
+//                        if (random <= 20) {
+//                            inventory.addItem(Items.Heart.getHeartItem(70));
+//                            return;
+//                        }
+//                        if (random <= 35) {
+//                            inventory.addItem(Items.Heart.getHeartItem(50));
+//                            return;
+//                        }
+//                        if (random <= 65) {
+//                            inventory.addItem(Items.Heart.getHeartItem(30));
+//                            return;
+//                        }
+//                        if (random <= 80) {
+//                            inventory.addItem(Items.Heart.getHeartItem(5));
+//                            return;
+//                        }
                     }
                 }
             }, 1L);

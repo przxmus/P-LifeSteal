@@ -7,15 +7,14 @@ import dev.jorel.commandapi.arguments.PlayerArgument;
 import dev.jorel.commandapi.arguments.StringArgument;
 import eu.vibemc.lifesteal.events.PlayerDeath;
 import eu.vibemc.lifesteal.events.PlayerInteract;
+import eu.vibemc.lifesteal.other.Config;
 import eu.vibemc.lifesteal.other.Items;
 import eu.vibemc.lifesteal.other.LootPopulator;
-import org.bstats.bukkit.Metrics;
+import eu.vibemc.lifesteal.other.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.lang.reflect.Method;
 
 public final class Main extends JavaPlugin {
 
@@ -37,11 +36,12 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
 
 
-        for (World world : Bukkit.getServer().getWorlds()) {
-            world.getPopulators().removeIf(blockPopulator -> blockPopulator instanceof LootPopulator);
-            world.getPopulators().add(new LootPopulator(this));
+        if (Config.getBoolean("loot.enabled")) {
+            for (World world : Bukkit.getServer().getWorlds()) {
+                world.getPopulators().removeIf(blockPopulator -> blockPopulator instanceof LootPopulator);
+                world.getPopulators().add(new LootPopulator(this));
+            }
         }
-
 
 
         new CommandAPICommand("lifesteal")
@@ -53,7 +53,7 @@ public final class Main extends JavaPlugin {
                     sender.sendMessage("§aCreated by §6§ldevPrzemuS");
                     sender.sendMessage("§6§lhttps://youtube.com/devPrzemuS");
                     sender.sendMessage("§6§lhttps://github.com/dewPrzemuS");
-                    sender.sendMessage("§6§lhttps://www.spigotmc.org/members/devprzemus.1445270/");
+                    sender.sendMessage("§6§lhttps://www.spigotmc.org/resources/p-lifesteal.101967/");
                     sender.sendMessage("     ");
                 })
                 .withSubcommand(new CommandAPICommand("reload")
@@ -61,6 +61,26 @@ public final class Main extends JavaPlugin {
                         .withShortDescription("Reloads config.")
                         .executes((sender, args) -> {
                             Main.getInstance().reloadConfig();
+                            sender.sendMessage(Config.getMessage("configReloaded"));
+                        }))
+                .withSubcommand(new CommandAPICommand("give")
+                        .withShortDescription("Gives you specified item.")
+                        .withArguments(new StringArgument("item").replaceSuggestions(ArgumentSuggestions.strings("extra_life")), new PlayerArgument("player"), new IntegerArgument("chance_of_success"), new IntegerArgument("amount"))
+                        .executes((sender, args) -> {
+                            String item = (String) args[0];
+                            Player player = (Player) args[1];
+                            int chance = (int) args[2];
+                            int amount = (int) args[3];
+                            if (item.equalsIgnoreCase("extra_life")) {
+                                if (!player.hasPermission("lifesteal.give.extraheart")) {
+                                    return;
+                                }
+                                // loop amount times
+                                for (int i = 0; i < amount; i++) {
+                                    player.getInventory().addItem(Items.Heart.getHeartItem(chance));
+                                    player.updateInventory();
+                                }
+                            }
                         })
                 ).register();
     }

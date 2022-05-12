@@ -3,10 +3,10 @@
 heartItem:
   enabled: true
   name: "&c&lExtra Heart"
-  item:
+  material: "RED_DYE" # Material Name, get one from https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html !!! CASE SENSITIVE !!!
   lore:
     - "&6Gives an extra heart!"
-    - "&7&oYou have ${chance} to get an additional heart added."
+    - "&7&oYou have ${chance}% to get an additional heart added."
   loseChance: 50 # Chance of losing heart at failure.
 
 banOn0Hearts: true # If true, player will be ip-banned if they have 0 hearts.
@@ -39,3 +39,4 @@ messages:
   noMoreHeartsBan: "&c&lYou've lost all your lives."
   bannedNoMoreHeartsBroadcast: "&c&l${player} &4&lhas lost all his lives."
   itemDisabled: "&c&lThis item is disabled."
+  configReloaded: "&aConfig reloaded."

@@ -14,9 +14,9 @@ import java.util.List;
 public class Items {
     public static class Heart {
         public static ItemStack getHeartItem(int chance) {
-            ItemStack paper = new ItemStack(Material.PAPER);
-            paper.setAmount(1);
-            ItemMeta paperMeta = paper.getItemMeta();
+            ItemStack extraHeart = new ItemStack(Material.getMaterial(Config.getString("heartItem.material")));
+            extraHeart.setAmount(1);
+            ItemMeta paperMeta = extraHeart.getItemMeta();
             paperMeta.setDisplayName(Config.translateHexCodes(Config.getString("heartItem.name")));
             ArrayList<String> lore = new ArrayList<String>();
             List<String> configLoreList = Config.getStringList("heartItem.lore");
@@ -26,8 +26,8 @@ public class Items {
             }
             paperMeta.setLore(lore);
             paperMeta.getPersistentDataContainer().set(new NamespacedKey("lifesteal", "chance"), PersistentDataType.INTEGER, chance);
-            paper.setItemMeta(paperMeta);
-            return paper;
+            extraHeart.setItemMeta(paperMeta);
+            return extraHeart;
         }
 
         private static int getChance(ItemStack item) {
@@ -56,7 +56,6 @@ public class Items {
             } else {
                 // create another chance
                 int secondRandom = (int) (Math.random() * 100);
-                player.sendMessage(String.valueOf(secondRandom));
                 if (secondRandom <= Config.getInt("heartItem.loseChance")) {
                     player.sendActionBar(Config.getMessage("heartFailure"));
                     player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
