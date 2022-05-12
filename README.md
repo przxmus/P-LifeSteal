@@ -6,6 +6,9 @@
 
 <p align="center">
     <a href="#">
+        <img href="https://ls.przemus.xyz/" alt="docs" src="https://img.shields.io/badge/docs-alpha-brightgreen"/>
+    </a>
+    <a href="#">
         <img alt="spigot" src="https://img.shields.io/badge/spigot-lifesteal-brightgreen"/>
     </a>
     <a href="https://bstats.org/plugin/bukkit/P-LifeSteal" alt="servers">
@@ -15,6 +18,10 @@
         <img src="https://img.shields.io/bstats/players/15176?color=brightgreen"/>
     </a>
 </p>
+
+## [Documentation](https://ls.przemus.xyz/)
+
+Click text above to open documentation.
 
 ## What is it?
 
@@ -29,5 +36,3 @@ P-LifeSteal brings a new game mechanic. When a player dies, he loses one of his 
 - Ability to enable an announcement that a player has been banned for not having hearts in chat for all players.
 - Configurable appearance of the item of extra heart.
 - And many more.
-
-## Commands
