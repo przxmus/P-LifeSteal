@@ -39,6 +39,11 @@ public class Items {
         }
 
         public static void useHeart(Player player, ItemStack item) {
+            if (!Config.getBoolean("heartItem.enabled")) {
+                player.sendActionBar(Config.getMessage("itemDisabled"));
+                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
+                return;
+            }
             // get chance
             int chance = getChance(item);
             item.setAmount(item.getAmount() - 1);

@@ -9,10 +9,13 @@ import eu.vibemc.lifesteal.events.PlayerDeath;
 import eu.vibemc.lifesteal.events.PlayerInteract;
 import eu.vibemc.lifesteal.other.Items;
 import eu.vibemc.lifesteal.other.LootPopulator;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.lang.reflect.Method;
 
 public final class Main extends JavaPlugin {
 
@@ -25,6 +28,7 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        Metrics metrics = new Metrics(this, 15176);
         instance = this;
         this.getConfig().options().copyDefaults();
         this.saveDefaultConfig();
@@ -44,8 +48,6 @@ public final class Main extends JavaPlugin {
                 .withShortDescription("Main LifeSteal command.")
                 .withAliases("ls", "pls", "p-ls", "plifesteal", "p-lifesteal")
                 .executes((sender, args) -> {
-                    sender.sendMessage("     ");
-                    sender.sendMessage("   ");
                     sender.sendMessage("      ");
                     sender.sendMessage("§aP-LifeSteal");
                     sender.sendMessage("§aCreated by §6§ldevPrzemuS");
@@ -53,8 +55,6 @@ public final class Main extends JavaPlugin {
                     sender.sendMessage("§6§lhttps://github.com/dewPrzemuS");
                     sender.sendMessage("§6§lhttps://www.spigotmc.org/members/devprzemus.1445270/");
                     sender.sendMessage("     ");
-                    sender.sendMessage("          ");
-                    sender.sendMessage("               ");
                 })
                 .withSubcommand(new CommandAPICommand("reload")
                         .withPermission("lifesteal.reload")
