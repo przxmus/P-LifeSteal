@@ -60,8 +60,7 @@ public class LootPopulator extends BlockPopulator {
                     });
                 }
             }, 1L);
-        } catch (IllegalPluginAccessException e) {
-            return;
+        } catch (IllegalPluginAccessException ignored) {
         }
 
     }

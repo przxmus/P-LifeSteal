@@ -18,7 +18,7 @@ public class Items {
             extraHeart.setAmount(1);
             ItemMeta paperMeta = extraHeart.getItemMeta();
             paperMeta.setDisplayName(Config.translateHexCodes(Config.getString("heartItem.name")));
-            ArrayList<String> lore = new ArrayList<String>();
+            ArrayList<String> lore = new ArrayList<>();
             List<String> configLoreList = Config.getStringList("heartItem.lore");
             // set lore from config
             for (String loreLine : configLoreList) {

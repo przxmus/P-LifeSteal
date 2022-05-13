@@ -2,7 +2,6 @@ package eu.vibemc.lifesteal.events;
 
 import eu.vibemc.lifesteal.other.Config;
 import org.bukkit.Sound;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,7 +12,7 @@ public class PlayerDeath implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player player = e.getEntity();
-        Entity killer = player.getKiller();
+        Player killer = player.getKiller();
         if (player.getMaxHealth() - 2 <= 0) {
             if (Config.getBoolean("banOn0Hearts")) {
                 // ban player
@@ -32,14 +31,13 @@ public class PlayerDeath implements Listener {
             // send thunder sound to killed player
             player.playSound(player.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 100, 2);
         }
-        if (killer instanceof Player) {
-            Player killerPlayer = (Player) killer;
+        if (killer != null) {
             // add 2 to max health of killer
-            killerPlayer.setMaxHealth(killerPlayer.getMaxHealth() + 2);
+            killer.setMaxHealth(killer.getMaxHealth() + 2);
             // send actionbar to killer
             player.sendActionBar(Config.getMessage("heartGained"));
             // send level up sound to killer
-            killerPlayer.playSound(killerPlayer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
+            killer.playSound(killer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
         }
 
     }

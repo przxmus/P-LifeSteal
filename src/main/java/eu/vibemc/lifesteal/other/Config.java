@@ -27,23 +27,22 @@ public class Config {
         return ChatColor.translateAlternateColorCodes('&', Main.getInstance().getConfig().getString("messages." + path));
     }
 
-    public static final Pattern HEX_PATTERN = Pattern.compile("&#(\\w{5}[0-9a-f])");
+    public static final Pattern HEX_PATTERN = Pattern.compile("&#(\\w{5}[\\da-f])");
 
     public static Component textComponentFromString(final @NonNull String content) {
-        Component component = Component.text(content);
-        return component;
+        return Component.text(content);
     }
 
     public static String translateHexCodes(String textToTranslate) {
 
         Matcher matcher = HEX_PATTERN.matcher(textToTranslate);
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder builder = new StringBuilder();
 
         while (matcher.find()) {
-            matcher.appendReplacement(buffer, net.md_5.bungee.api.ChatColor.of("#" + matcher.group(1)).toString());
+            matcher.appendReplacement(builder, net.md_5.bungee.api.ChatColor.of("#" + matcher.group(1)).toString());
         }
 
-        return net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', matcher.appendTail(buffer).toString());
+        return net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', matcher.appendTail(builder).toString());
 
     }
 }
