@@ -7,11 +7,9 @@ import dev.jorel.commandapi.arguments.PlayerArgument;
 import dev.jorel.commandapi.arguments.StringArgument;
 import eu.vibemc.lifesteal.events.PlayerDeath;
 import eu.vibemc.lifesteal.events.PlayerInteract;
-import eu.vibemc.lifesteal.other.Config;
-import eu.vibemc.lifesteal.other.Items;
-import eu.vibemc.lifesteal.other.LootPopulator;
-import eu.vibemc.lifesteal.other.Metrics;
+import eu.vibemc.lifesteal.other.*;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,6 +25,30 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+
+        new UpdateChecker(this, 101967).getVersion(version -> {
+            if (this.getDescription().getVersion().equals(version)) {
+                Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + this.getDescription().getVersion() + "--------");
+                if (this.getDescription().getVersion().contains("Alpha") || this.getDescription().getVersion().contains("Beta")) {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "- DO NOT USE THIS PLUGIN IN PRODUCTION!");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "- SOME FEATURES ARE NOT FINISHED YET!");
+                }
+                Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "- You are up to date.");
+                Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "- Thank you for using my plugin!");
+                Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + this.getDescription().getVersion() + "--------");
+
+            } else {
+                Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + this.getDescription().getVersion() + "--------");
+                if (this.getDescription().getVersion().contains("Alpha") || this.getDescription().getVersion().contains("Beta")) {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "- DO NOT USE THIS PLUGIN IN PRODUCTION!");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "- SOME FEATURES ARE NOT FINISHED YET!");
+                }
+                Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "- You have outdated version of plugin!");
+                Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "- Please download new version from SpigotMC or Github.");
+                Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "- Thank you for using my plugin!");
+                Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + this.getDescription().getVersion() + "--------");
+            }
+        });
         Metrics metrics = new Metrics(this, 15176);
         instance = this;
         this.getConfig().options().copyDefaults();
