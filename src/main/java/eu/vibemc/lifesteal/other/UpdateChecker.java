@@ -1,13 +1,16 @@
 package eu.vibemc.lifesteal.other;
 
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
-import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Scanner;
+import java.nio.charset.StandardCharsets;
 import java.util.function.Consumer;
 
 // From: https://www.spigotmc.org/wiki/creating-an-update-checker-that-checks-for-updates
@@ -23,12 +26,21 @@ public class UpdateChecker {
 
     public void getVersion(final Consumer<String> consumer) {
         Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> {
-            try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId).openStream(); Scanner scanner = new Scanner(inputStream)) {
-                if (scanner.hasNext()) {
-                    consumer.accept(scanner.next());
-                }
-            } catch (IOException exception) {
-                plugin.getLogger().info("Unable to check for updates: " + exception.getMessage());
+            // make api get request to https://api.spigotmc.org/simple/0.2/index.php?action=getResource&id=101967 then get response json
+            try {
+                URL url = new URL("https://api.spigotmc.org/simple/0.2/index.php?action=getResource&id=101967");
+                HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                String response = new String(connection.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+                JSONParser parser = new JSONParser();
+                JSONObject json = (JSONObject) parser.parse(response);
+                consumer.accept(String.valueOf(json.get("current_version")));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
         });
     }
