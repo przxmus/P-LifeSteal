@@ -14,7 +14,7 @@
     <a href="https://www.spigotmc.org/resources/p-lifesteal.101967/">
         <img alt="spigot" src="https://img.shields.io/badge/spigot-lifesteal-brightgreen"/>
     </a>
-    <a href="https://discord.gg/4Qk5kBT9UX" alt="discord">
+    <a href="https://discord.gg/8sjwaQTHGC" alt="discord">
         <img src="https://img.shields.io/discord/974655539881574470?label=discord"/>
     </a>
     <a href="https://bstats.org/plugin/bukkit/P-LifeSteal" alt="servers">
