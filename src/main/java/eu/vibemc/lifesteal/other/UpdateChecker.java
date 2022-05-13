@@ -1,7 +1,9 @@
 package eu.vibemc.lifesteal.other;
 
+import com.google.gson.JsonObject;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -28,13 +30,14 @@ public class UpdateChecker {
         Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> {
             // make api get request to https://api.spigotmc.org/simple/0.2/index.php?action=getResource&id=101967 then get response json
             try {
-                URL url = new URL("https://api.spigotmc.org/simple/0.2/index.php?action=getResource&id=101967");
+                URL url = new URL("https://api.github.com/repos/dewPrzemuS/P-LifeSteal/releases");
                 HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 String response = new String(connection.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
                 JSONParser parser = new JSONParser();
-                JSONObject json = (JSONObject) parser.parse(response);
-                consumer.accept(String.valueOf(json.get("current_version")));
+                JSONArray array = (JSONArray) parser.parse(response);
+                JSONObject json = (JSONObject) array.get(0);
+                consumer.accept(String.valueOf(json.get("tag_name")));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
