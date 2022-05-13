@@ -1,6 +1,8 @@
 package eu.vibemc.lifesteal;
 
+import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPICommand;
+import dev.jorel.commandapi.CommandAPIConfig;
 import dev.jorel.commandapi.arguments.ArgumentSuggestions;
 import dev.jorel.commandapi.arguments.IntegerArgument;
 import dev.jorel.commandapi.arguments.PlayerArgument;
@@ -23,48 +25,8 @@ public final class Main extends JavaPlugin {
     }
 
     @Override
-    public void onEnable() {
-        // Plugin startup logic
-
-        new UpdateChecker(this, 101967).getVersion(version -> {
-            if (this.getDescription().getVersion().equals(version)) {
-                Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + this.getDescription().getVersion() + "--------");
-                if (this.getDescription().getVersion().contains("Alpha") || this.getDescription().getVersion().contains("Beta")) {
-                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "- DO NOT USE THIS PLUGIN IN PRODUCTION!");
-                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "- SOME FEATURES ARE NOT FINISHED YET!");
-                }
-                Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "- You are up to date.");
-                Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "- Thank you for using my plugin!");
-                Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + this.getDescription().getVersion() + "--------");
-
-            } else {
-                Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + this.getDescription().getVersion() + "--------");
-                if (this.getDescription().getVersion().contains("Alpha") || this.getDescription().getVersion().contains("Beta")) {
-                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "- DO NOT USE THIS PLUGIN IN PRODUCTION!");
-                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "- SOME FEATURES ARE NOT FINISHED YET!");
-                }
-                Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "- You have outdated version of plugin!");
-                Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "- Please download new version from SpigotMC or Github.");
-                Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "- Thank you for using my plugin!");
-                Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + this.getDescription().getVersion() + "--------");
-            }
-        });
-        Metrics metrics = new Metrics(this, 15176);
-        instance = this;
-        this.getConfig().options().copyDefaults();
-        this.saveDefaultConfig();
-
-        getServer().getPluginManager().registerEvents(new PlayerDeath(), this);
-        getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
-
-
-        if (Config.getBoolean("loot.enabled")) {
-            for (World world : Bukkit.getServer().getWorlds()) {
-                world.getPopulators().removeIf(blockPopulator -> blockPopulator instanceof LootPopulator);
-                world.getPopulators().add(new LootPopulator(this));
-            }
-        }
-
+    public void onLoad() {
+        CommandAPI.onLoad(new CommandAPIConfig());
 
         new CommandAPICommand("lifesteal")
                 .withShortDescription("Main LifeSteal command.")
@@ -109,6 +71,53 @@ public final class Main extends JavaPlugin {
                             }
                         })
                 ).register();
+    }
+
+    @Override
+    public void onEnable() {
+        // Plugin startup logic
+        CommandAPI.onEnable(this);
+
+        new UpdateChecker(this, 101967).getVersion(version -> {
+            if (this.getDescription().getVersion().equals(version)) {
+                Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + this.getDescription().getVersion() + "--------");
+                if (this.getDescription().getVersion().contains("Alpha") || this.getDescription().getVersion().contains("Beta")) {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "- DO NOT USE THIS PLUGIN IN PRODUCTION!");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "- SOME FEATURES ARE NOT FINISHED YET!");
+                }
+                Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "- You are up to date.");
+                Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "- Thank you for using my plugin!");
+                Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + this.getDescription().getVersion() + "--------");
+
+            } else {
+                Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + this.getDescription().getVersion() + "--------");
+                if (this.getDescription().getVersion().contains("Alpha") || this.getDescription().getVersion().contains("Beta")) {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "- DO NOT USE THIS PLUGIN IN PRODUCTION!");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "- SOME FEATURES ARE NOT FINISHED YET!");
+                }
+                Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "- You have outdated version of plugin!");
+                Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "- Please download new version from SpigotMC or Github.");
+                Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "- Thank you for using my plugin!");
+                Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + this.getDescription().getVersion() + "--------");
+            }
+        });
+        Metrics metrics = new Metrics(this, 15176);
+        instance = this;
+        this.getConfig().options().copyDefaults();
+        this.saveDefaultConfig();
+
+        getServer().getPluginManager().registerEvents(new PlayerDeath(), this);
+        getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
+
+
+        if (Config.getBoolean("loot.enabled")) {
+            for (World world : Bukkit.getServer().getWorlds()) {
+                world.getPopulators().removeIf(blockPopulator -> blockPopulator instanceof LootPopulator);
+                world.getPopulators().add(new LootPopulator(this));
+            }
+        }
+
+
     }
 
 
