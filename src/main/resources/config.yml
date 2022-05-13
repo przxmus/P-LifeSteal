@@ -30,6 +30,7 @@ heartItem:
     - "&7&oYou have ${chance}% to get an additional heart added."
   loseChance: 50
 
+removeHeartOnlyIfKilledByPlayer: false
 banOn0Hearts: true
 broadcastBanFrom0Hearts: true
 

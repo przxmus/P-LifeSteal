@@ -48,7 +48,7 @@ public final class Main extends JavaPlugin {
                                 .executes((sender, args) -> {
                                     Player player = (Player) args[0];
                                     int amount = (int) player.getMaxHealth();
-                                    player.sendMessage(Config.getMessage("heartCheck").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
+                                    sender.sendMessage(Config.getMessage("heartCheck").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
                                 }))
                         .withSubcommand(new CommandAPICommand("add")
                                 .withPermission("lifesteal.heart.manage")
