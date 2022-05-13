@@ -30,74 +30,106 @@ public final class Main extends JavaPlugin {
     public void onLoad() {
         CommandAPI.onLoad(new CommandAPIConfig());
 
-        new CommandAPICommand("lifesteal").withShortDescription("Main LifeSteal command.").withAliases("ls", "pls", "p-ls", "plifesteal", "p-lifesteal").executes((sender, args) -> {
+        new CommandAPICommand("lifesteal")
+                .withShortDescription("Main LifeSteal command.")
+                .withAliases("ls", "pls", "p-ls", "plifesteal", "p-lifesteal")
+                .executes((sender, args) -> {
                     sender.sendMessage("§aP-LifeSteal");
                     sender.sendMessage("§aCreated by §6§ldevPrzemuS");
                     sender.sendMessage("§6§lhttps://github.com/dewPrzemuS/P-LifeSteal");
                     sender.sendMessage("§6§lhttps://www.spigotmc.org/resources/p-lifesteal.101967/");
-                }).withSubcommand(new CommandAPICommand("heart").withShortDescription("Command to manage hearts.").withSubcommand(new CommandAPICommand("check").withPermission("lifesteal.heart.check").withShortDescription("Check how many hearts player have.").withArguments(new PlayerArgument("player")).executes((sender, args) -> {
-                            Player player = (Player) args[0];
-                            int amount = (int) player.getMaxHealth();
-                            player.sendMessage(Config.getMessage("heartCheck").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
-                        })).withSubcommand(new CommandAPICommand("add").withPermission("lifesteal.heart.manage").withArguments(new PlayerArgument("player"), new IntegerArgument("amount")).withShortDescription("Add hearts to player.").executes((sender, args) -> {
-                            Player player = (Player) args[0];
-                            int amount = (int) args[1];
-                            player.setMaxHealth(player.getMaxHealth() + amount);
-                            player.sendMessage(Config.getMessage("heartAdded").replace("${amount}", String.valueOf(amount)));
-                            sender.sendMessage(Config.getMessage("heartAddedAdmin").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
-                        })).withSubcommand(new CommandAPICommand("remove").withPermission("lifesteal.heart.manage").withArguments(new PlayerArgument("player"), new IntegerArgument("amount")).withShortDescription("Removes hearts from player.").executes((sender, args) -> {
-                            Player player = (Player) args[0];
-                            int amount = (int) args[1];
-                            player.setMaxHealth(player.getMaxHealth() - amount);
-                            player.sendMessage(Config.getMessage("heartRemoved").replace("${amount}", String.valueOf(amount)));
-                            sender.sendMessage(Config.getMessage("heartRemovedAdmin").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
+                })
+                .withSubcommand(new CommandAPICommand("heart")
+                        .withShortDescription("Command to manage hearts.")
+                        .withSubcommand(new CommandAPICommand("check")
+                                .withPermission("lifesteal.heart.check")
+                                .withShortDescription("Check how many hearts player have.")
+                                .withArguments(new PlayerArgument("player"))
+                                .executes((sender, args) -> {
+                                    Player player = (Player) args[0];
+                                    int amount = (int) player.getMaxHealth();
+                                    player.sendMessage(Config.getMessage("heartCheck").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
+                                }))
+                        .withSubcommand(new CommandAPICommand("add")
+                                .withPermission("lifesteal.heart.manage")
+                                .withArguments(new PlayerArgument("player"), new IntegerArgument("amount"))
+                                .withShortDescription("Add hearts to player.")
+                                .executes((sender, args) -> {
+                                    Player player = (Player) args[0];
+                                    int amount = (int) args[1];
+                                    player.setMaxHealth(player.getMaxHealth() + amount);
+                                    player.sendMessage(Config.getMessage("heartAdded").replace("${amount}", String.valueOf(amount)));
+                                    sender.sendMessage(Config.getMessage("heartAddedAdmin").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
+                                }))
+                        .withSubcommand(new CommandAPICommand("remove")
+                                .withPermission("lifesteal.heart.manage")
+                                .withArguments(new PlayerArgument("player"), new IntegerArgument("amount"))
+                                .withShortDescription("Removes hearts from player.")
+                                .executes((sender, args) -> {
+                                    Player player = (Player) args[0];
+                                    int amount = (int) args[1];
+                                    player.setMaxHealth(player.getMaxHealth() - amount);
+                                    player.sendMessage(Config.getMessage("heartRemoved").replace("${amount}", String.valueOf(amount)));
+                                    sender.sendMessage(Config.getMessage("heartRemovedAdmin").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
 
-                        })).withSubcommand(new CommandAPICommand("set").withPermission("lifesteal.heart.manage").withArguments(new PlayerArgument("player"), new IntegerArgument("amount")).withShortDescription("Sets amount of player's hearts.").executes((sender, args) -> {
-                            Player player = (Player) args[0];
-                            int amount = (int) args[1];
-                            player.setMaxHealth(amount);
-                            player.sendMessage(Config.getMessage("heartSetted").replace("${amount}", String.valueOf(amount)));
-                            sender.sendMessage(Config.getMessage("heartSettedAdmin").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
+                                }))
+                        .withSubcommand(new CommandAPICommand("set")
+                                .withPermission("lifesteal.heart.manage")
+                                .withArguments(new PlayerArgument("player"), new IntegerArgument("amount"))
+                                .withShortDescription("Sets amount of player's hearts.")
+                                .executes((sender, args) -> {
+                                    Player player = (Player) args[0];
+                                    int amount = (int) args[1];
+                                    player.setMaxHealth(amount);
+                                    player.sendMessage(Config.getMessage("heartSetted").replace("${amount}", String.valueOf(amount)));
+                                    sender.sendMessage(Config.getMessage("heartSettedAdmin").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
 
-                        }))
+                                }))
 
                 )
 //                .withSubcommand(new CommandAPICommand("debug")
 //                        .executes((sender, args) -> {
 //
 //                        }))
-                .withSubcommand(new CommandAPICommand("reload").withPermission("lifesteal.reload").withShortDescription("Reloads config.").executes((sender, args) -> {
-                    unregisterRecipes();
-                    for (World world : Bukkit.getServer().getWorlds()) {
-                        world.getPopulators().removeIf(blockPopulator -> blockPopulator instanceof LootPopulator);
-                    }
-                    Main.getInstance().reloadConfig();
-                    sender.sendMessage(Config.getMessage("configReloaded"));
-                    registerRecipes();
-                    sender.sendMessage(Config.getMessage("recipesReloaded"));
-                    if (Config.getBoolean("loot.enabled")) {
-                        for (World world : Bukkit.getServer().getWorlds()) {
-                            world.getPopulators().add(new LootPopulator(this));
-                        }
-                    }
-                    sender.sendMessage(Config.getMessage("lootReloaded"));
+                .withSubcommand(new CommandAPICommand("reload")
+                        .withPermission("lifesteal.reload")
+                        .withShortDescription("Reloads config.")
+                        .executes((sender, args) -> {
+                            unregisterRecipes();
+                            for (World world : Bukkit.getServer().getWorlds()) {
+                                world.getPopulators().removeIf(blockPopulator -> blockPopulator instanceof LootPopulator);
+                            }
+                            Main.getInstance().reloadConfig();
+                            sender.sendMessage(Config.getMessage("configReloaded"));
+                            registerRecipes();
+                            sender.sendMessage(Config.getMessage("recipesReloaded"));
+                            if (Config.getBoolean("loot.enabled")) {
+                                for (World world : Bukkit.getServer().getWorlds()) {
+                                    world.getPopulators().add(new LootPopulator(this));
+                                }
+                            }
+                            sender.sendMessage(Config.getMessage("lootReloaded"));
 
-                })).withSubcommand(new CommandAPICommand("give").withShortDescription("Gives you specified item.").withArguments(new StringArgument("item").replaceSuggestions(ArgumentSuggestions.strings("extra_life")), new PlayerArgument("player"), new IntegerArgument("chance_of_success"), new IntegerArgument("amount")).executes((sender, args) -> {
-                    String item = (String) args[0];
-                    Player player = (Player) args[1];
-                    int chance = (int) args[2];
-                    int amount = (int) args[3];
-                    if (item.equalsIgnoreCase("extra_life")) {
-                        if (!player.hasPermission("lifesteal.give.extraheart")) {
-                            return;
-                        }
-                        // loop amount times
-                        for (int i = 0; i < amount; i++) {
-                            player.getInventory().addItem(Items.Heart.getHeartItem(chance));
-                            player.updateInventory();
-                        }
-                    }
-                })).register();
+                        }))
+                .withSubcommand(new CommandAPICommand("give")
+                        .withShortDescription("Gives you specified item.")
+                        .withArguments(new StringArgument("item")
+                                .replaceSuggestions(ArgumentSuggestions.strings("extra_life")), new PlayerArgument("player"), new IntegerArgument("chance_of_success"), new IntegerArgument("amount")).executes((sender, args) -> {
+                            String item = (String) args[0];
+                            Player player = (Player) args[1];
+                            int chance = (int) args[2];
+                            int amount = (int) args[3];
+                            if (item.equalsIgnoreCase("extra_life")) {
+                                if (!player.hasPermission("lifesteal.give.extraheart")) {
+                                    return;
+                                }
+                                // loop amount times
+                                for (int i = 0; i < amount; i++) {
+                                    player.getInventory().addItem(Items.Heart.getHeartItem(chance));
+                                    player.updateInventory();
+                                }
+                            }
+                        })).register();
     }
 
     @Override
