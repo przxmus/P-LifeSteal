@@ -8,8 +8,14 @@
     <a href="https://ls.przemus.xyz/">
         <img href="https://ls.przemus.xyz/" alt="docs" src="https://img.shields.io/badge/docs-alpha-brightgreen"/>
     </a>
+    <a href="https://www.paypal.me/devprzemus">
+        <img href="https://www.paypal.me/devprzemus" alt="docs" src="https://img.shields.io/badge/donate-paypal-brightgreen"/>
+    </a>
     <a href="https://www.spigotmc.org/resources/p-lifesteal.101967/">
         <img alt="spigot" src="https://img.shields.io/badge/spigot-lifesteal-brightgreen"/>
+    </a>
+    <a href="https://discord.gg/4Qk5kBT9UX" alt="discord">
+        <img src="https://img.shields.io/discord/974655539881574470?label=discord"/>
     </a>
     <a href="https://bstats.org/plugin/bukkit/P-LifeSteal" alt="servers">
         <img src="https://img.shields.io/bstats/servers/15176?color=brightgreen"/>
