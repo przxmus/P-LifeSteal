@@ -6,7 +6,7 @@
 
 <p align="center">
     <a href="https://ls.przemus.xyz/">
-        <img href="https://ls.przemus.xyz/" alt="docs" src="https://img.shields.io/badge/docs-alpha-brightgreen"/>
+        <img href="https://ls.przemus.xyz/" alt="docs" src="https://img.shields.io/badge/docs-beta-brightgreen"/>
     </a>
     <a href="https://www.paypal.me/devprzemus">
         <img href="https://www.paypal.me/devprzemus" alt="docs" src="https://img.shields.io/badge/donate-paypal-brightgreen"/>
@@ -39,6 +39,7 @@ features by looking at the plugin configuration.
 
 - Highly configurable.
 - An item of extra heart with a unique chance of success.
+- Configurable extra heart recipe.
 - Ability to enable item of extra heart generation in minecraft generated structures.
 - Ability to enable banning if a player doesn't have any hearts left.
 - Ability to enable an announcement that a player has been banned for not having hearts in chat for all players.
