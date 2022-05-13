@@ -78,6 +78,10 @@ public final class Main extends JavaPlugin {
                     sender.sendMessage("§6§lhttps://www.spigotmc.org/resources/p-lifesteal.101967/");
                     sender.sendMessage("     ");
                 })
+//                .withSubcommand(new CommandAPICommand("debug")
+//                        .executes((sender, args) -> {
+//
+//                        }))
                 .withSubcommand(new CommandAPICommand("reload")
                         .withPermission("lifesteal.reload")
                         .withShortDescription("Reloads config.")

@@ -15,21 +15,31 @@ broadcastBanFrom0Hearts: true # If true, there will be message visible to everyo
 # INSERT YOUR DATA!
 # TEMPLATE:
 # loot:
-#   your_world_name_here:
-#     chanceForHeartToGenerate: number between 1 and 100
-#     heartAddChance: number between 1 and 100
-#   your_second_world_name_here:
-#     chanceForHeartToGenerate: number between 1 and 100
-#     heartAddChance: number between 1 and 100
-#   your_third_world_name_here:
-#     chanceForHeartToGenerate: number between 1 and 100
-#     heartAddChance: number between 1 and 100
+#   enabled: true # If false, loot will not be generated in structures chests.
+#   worlds:
+#     your_world_name:
+#       chanceForHeartToGenerate: 50 # number between 0 and 100
+#       heartAddChance: 50 # number between 0 and 100
+#     your_second_world_name:
+#       chanceForHeartToGenerate: 50 # number between 0 and 100
+#       heartAddChance: 50 # number between 0 and 100
+#     your_third_world_name:
+#       chanceForHeartToGenerate: 50 # number between 0 and 100
+#       heartAddChance: 50 # number between 0 and 100
+
 
 loot:
   enabled: true # If false, loot will not be generated in structures chests.
-  world:
-    chanceForHeartToGenerate: 100
-    heartAddChance: 50
+  worlds:
+    world:
+      chanceForHeartToGenerate: 100
+      heartAddChance: 50
+    world_nether:
+      chanceForHeartToGenerate: 100
+      heartAddChance: 75
+    world_the_end:
+      chanceForHeartToGenerate: 100
+      heartAddChance: 100
 
 messages:
   heartReceived: "&a&lYou've received an extra heart!"
