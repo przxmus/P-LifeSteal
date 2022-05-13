@@ -5,10 +5,10 @@
 </h1>
 
 <p align="center">
-    <a href="#">
+    <a href="https://ls.przemus.xyz/">
         <img href="https://ls.przemus.xyz/" alt="docs" src="https://img.shields.io/badge/docs-alpha-brightgreen"/>
     </a>
-    <a href="#">
+    <a href="https://www.spigotmc.org/resources/p-lifesteal.101967/">
         <img alt="spigot" src="https://img.shields.io/badge/spigot-lifesteal-brightgreen"/>
     </a>
     <a href="https://bstats.org/plugin/bukkit/P-LifeSteal" alt="servers">
@@ -20,8 +20,7 @@
 </p>
 
 ## [Documentation](https://ls.przemus.xyz/)
-
-Click text above to open documentation.
+### **Click text above to open documentation.**
 
 ## What is it?
 
