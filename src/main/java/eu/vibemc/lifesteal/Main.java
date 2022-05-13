@@ -183,7 +183,7 @@ public final class Main extends JavaPlugin {
     private void registerRecipes() {
         if (Config.getBoolean("recipe.enabled")) {
             Main.getInstance().getConfig().getConfigurationSection("recipe.recipes").getKeys(false).forEach(recipe -> {
-                if (Config.getBoolean("recipe.recipes." + recipe + ".enabled")) {
+                if (Config.getBoolean("recipe.recipes." + recipe + ".recipe-enabled")) {
                     if (Config.getBoolean("recipe.recipes." + recipe + ".shaped")) {
                         ShapedRecipe shapedRecipe = new ShapedRecipe(new NamespacedKey("lifesteal", "extraheartrecipe" + recipe), Items.Heart.getHeartItem(Config.getInt("recipe.recipes." + recipe + ".extraHeartItemUseSuccess")));
                         shapedRecipe.shape("ABC", "DEF", "GHI");
@@ -234,7 +234,7 @@ public final class Main extends JavaPlugin {
 
     private void unregisterRecipes() {
         Main.getInstance().getConfig().getConfigurationSection("recipe.recipes").getKeys(false).forEach(recipe -> {
-            if (Config.getBoolean("recipe.recipes." + recipe + ".enabled")) {
+            if (Config.getBoolean("recipe.recipes." + recipe + ".recipe-enabled")) {
                 Main.getInstance().getServer().removeRecipe(new NamespacedKey("lifesteal", "extraheartrecipe" + recipe));
             }
         });

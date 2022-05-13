@@ -6,7 +6,7 @@
 
     <groupId>eu.vibemc</groupId>
     <artifactId>LifeSteal</artifactId>
-    <version>Beta-6</version>
+    <version>Beta-7</version>
     <packaging>jar</packaging>
 
     <name>P-LifeSteal</name>

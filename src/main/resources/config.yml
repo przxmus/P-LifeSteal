@@ -1,57 +1,43 @@
-# To these settings you can provide the following values:
-# ${chance} - Chance to add heart
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# A guide on how to configure the plugin can be found in the official documentation.
+# https://ls.przemus.xyz/
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 heartItem:
   enabled: true
   name: "&c&lExtra Heart"
-  material: "RED_DYE" # Material Name, get one from https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html !!! CASE SENSITIVE !!!
+  material: "RED_DYE"
   lore:
     - "&6Gives an extra heart!"
     - "&7&oYou have ${chance}% to get an additional heart added."
-  loseChance: 50 # Chance of losing heart at failure.
+  loseChance: 50
 
-banOn0Hearts: true # If true, player will be ip-banned if they have 0 hearts.
-broadcastBanFrom0Hearts: true # If true, there will be message visible to everyone that some player got banned.
-
-# INSERT YOUR DATA!
-# TEMPLATE:
-# loot:
-#   enabled: true # If false, loot will not be generated in structures chests.
-#   worlds:
-#     your_world_name:
-#       chanceForHeartToGenerate: 50 # number between 0 and 100
-#       heartAddChance: 50 # number between 0 and 100
-#     your_second_world_name:
-#       chanceForHeartToGenerate: 50 # number between 0 and 100
-#       heartAddChance: 50 # number between 0 and 100
-#     your_third_world_name:
-#       chanceForHeartToGenerate: 50 # number between 0 and 100
-#       heartAddChance: 50 # number between 0 and 100
-
-# INSERT YOUR DATA!
-# TEMPLATE:
-# recipe:
-#   enabled: true
-#   recipes:
-#     unique_recipe_name_or_id:
-#       enabled: true
-#       shaped: true # Determines if, when a player crafts an item, they must craft it in the way listed below.
-#       extraHeartItemUseSuccess: 100 # number between 0 and 100
-#       items: # material names, get one from https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html (IF YOU WANT BLANK TYPE "AIR") !!! CASE SENSITIVE !!!
-#         - "DIAMOND_BLOCK"
-#         - "DIAMOND_BLOCK"
-#         - "DIAMOND_BLOCK"
-#         - "DIAMOND_BLOCK"
-#         - "NETHER_STAR"
-#         - "DIAMOND_BLOCK"
-#         - "DIAMOND_BLOCK"
-#         - "DIAMOND_BLOCK"
-#         - "DIAMOND_BLOCK"
+banOn0Hearts: true
+broadcastBanFrom0Hearts: true
 
 recipe:
   enabled: true
   recipes:
     1:
-      enabled: true
+      recipe-enabled: true
       shaped: true
       extraHeartItemUseSuccess: 100
       items:
@@ -96,3 +82,5 @@ messages:
   heartSetted: "&f&lSomeone set your hearts to ${amount}x."
   heartSettedAdmin: "&f&lYou set the number of hearts to ${amount}x for ${player}."
   heartCheck: "&e&l${player} has ${amount}x hearts."
+
+
