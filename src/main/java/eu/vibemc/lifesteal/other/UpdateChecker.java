@@ -1,6 +1,5 @@
 package eu.vibemc.lifesteal.other;
 
-import com.google.gson.JsonObject;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.json.simple.JSONArray;

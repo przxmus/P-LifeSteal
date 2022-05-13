@@ -26,11 +26,14 @@
 </p>
 
 ## [Documentation](https://ls.przemus.xyz/)
+
 ### **Click text above to open documentation.**
 
 ## What is it?
 
-P-LifeSteal brings a new game mechanic. When a player dies, he loses one of his hearts, but if he is killed by another player, the killer will receive the opponent's heart. The plugin is highly configurable and you can learn more about its features by looking at the plugin configuration.
+P-LifeSteal brings a new game mechanic. When a player dies, he loses one of his hearts, but if he is killed by another
+player, the killer will receive the opponent's heart. The plugin is highly configurable and you can learn more about its
+features by looking at the plugin configuration.
 
 ## Features
 

@@ -27,15 +27,52 @@ broadcastBanFrom0Hearts: true # If true, there will be message visible to everyo
 #       chanceForHeartToGenerate: 50 # number between 0 and 100
 #       heartAddChance: 50 # number between 0 and 100
 
+# INSERT YOUR DATA!
+# TEMPLATE:
+# recipe:
+#   enabled: true
+#   recipes:
+#     unique_recipe_name_or_id:
+#       enabled: true
+#       shaped: true # Determines if, when a player crafts an item, they must craft it in the way listed below.
+#       extraHeartItemUseSuccess: 100 # number between 0 and 100
+#       items: # material names, get one from https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html (IF YOU WANT BLANK TYPE "AIR") !!! CASE SENSITIVE !!!
+#         - "DIAMOND_BLOCK"
+#         - "DIAMOND_BLOCK"
+#         - "DIAMOND_BLOCK"
+#         - "DIAMOND_BLOCK"
+#         - "NETHER_STAR"
+#         - "DIAMOND_BLOCK"
+#         - "DIAMOND_BLOCK"
+#         - "DIAMOND_BLOCK"
+#         - "DIAMOND_BLOCK"
+
+recipe:
+  enabled: true
+  recipes:
+    1:
+      enabled: true
+      shaped: true
+      extraHeartItemUseSuccess: 100
+      items:
+        - "DIAMOND_BLOCK"
+        - "DIAMOND_BLOCK"
+        - "DIAMOND_BLOCK"
+        - "DIAMOND_BLOCK"
+        - "NETHER_STAR"
+        - "DIAMOND_BLOCK"
+        - "DIAMOND_BLOCK"
+        - "DIAMOND_BLOCK"
+        - "DIAMOND_BLOCK"
 
 loot:
-  enabled: true # If false, loot will not be generated in structures chests.
+  enabled: true
   worlds:
     world:
-      chanceForHeartToGenerate: 100
+      chanceForHeartToGenerate: 50
       heartAddChance: 50
     world_nether:
-      chanceForHeartToGenerate: 100
+      chanceForHeartToGenerate: 75
       heartAddChance: 75
     world_the_end:
       chanceForHeartToGenerate: 100
@@ -50,6 +87,8 @@ messages:
   bannedNoMoreHeartsBroadcast: "&c&l${player} &4&lhas lost all his lives."
   itemDisabled: "&c&lThis item is disabled."
   configReloaded: "&aConfig reloaded."
+  recipesReloaded: "&aRecipes reloaded."
+  lootReloaded: "&aLoot settings reloaded."
   heartRemoved: "&4&lSomeone has taken ${amount}x hearts from you."
   heartRemovedAdmin: "&4&lYou took ${amount}x hearts from ${player}."
   heartAdded: "&a&lSomeone added ${amount}x hearts to you."

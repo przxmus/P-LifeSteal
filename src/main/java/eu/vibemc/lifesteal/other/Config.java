@@ -11,23 +11,27 @@ import java.util.regex.Pattern;
 
 public class Config {
 
+    public static final Pattern HEX_PATTERN = Pattern.compile("&#(\\w{5}[0-9a-f])");
+
     public static Integer getInt(String path) {
         return Main.getInstance().getConfig().getInt(path);
     }
+
     public static boolean getBoolean(String path) {
         return Main.getInstance().getConfig().getBoolean(path);
     }
+
     public static String getString(String path) {
         return Main.getInstance().getConfig().getString(path);
     }
+
     public static List<String> getStringList(String path) {
         return Main.getInstance().getConfig().getStringList(path);
     }
+
     public static String getMessage(String path) {
         return ChatColor.translateAlternateColorCodes('&', Main.getInstance().getConfig().getString("messages." + path));
     }
-
-    public static final Pattern HEX_PATTERN = Pattern.compile("&#(\\w{5}[0-9a-f])");
 
     public static Component textComponentFromString(final @NonNull String content) {
         Component component = Component.text(content);
