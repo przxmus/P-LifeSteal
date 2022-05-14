@@ -18,15 +18,6 @@
         <img href="https://www.paypal.me/devprzemus" alt="docs" src="https://img.shields.io/badge/donate-blueviolet?style=for-the-badge"/>
     </a>
 </p>
-<hr style="margin-bottom:-10px">
-<a href="https://ls.przemus.xyz/" target="_blank" >
-<h1 align="center" style="margin: 0px; margin-bottom:-15px">
-Documentation
-</h1>
-</a>
-<h2 align="center" style="margin: 0px">
-Click text above to open documentation.
-</h2>
 
 ## What is it?
 
