@@ -18,7 +18,7 @@ public class Items {
             extraHeart.setAmount(1);
             ItemMeta paperMeta = extraHeart.getItemMeta();
             paperMeta.setDisplayName(Config.translateHexCodes(Config.getString("heartItem.name")));
-            ArrayList<String> lore = new ArrayList<String>();
+            ArrayList<String> lore = new ArrayList<>();
             List<String> configLoreList = Config.getStringList("heartItem.lore");
             // set lore from config
             for (String loreLine : configLoreList) {
@@ -60,9 +60,20 @@ public class Items {
                     player.sendActionBar(Config.getMessage("heartFailure"));
                     player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
                 } else {
-                    player.setMaxHealth(player.getMaxHealth() - 2);
-                    player.sendActionBar(Config.getMessage("heartLost"));
-                    player.playSound(player.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 100, 2);
+                    if (player.getMaxHealth() - 2 <= 0) {
+                        if (Config.getBoolean("banOn0Hearts")) {
+                            // ban player
+                            player.banPlayerIP(Config.getMessage("noMoreHeartsBan"));
+                            if (Config.getBoolean("broadcastBanFrom0Hearts")) {
+                                // send message to all players
+                                player.getServer().broadcastMessage(Config.getMessage("bannedNoMoreHeartsBroadcast"));
+                            }
+                        }
+                    } else {
+                        player.setMaxHealth(player.getMaxHealth() - 2);
+                        player.sendActionBar(Config.getMessage("heartLost"));
+                        player.playSound(player.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 100, 2);
+                    }
                 }
             }
         }

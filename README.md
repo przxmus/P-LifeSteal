@@ -1,33 +1,32 @@
 <h1 align="center">
   <br>
-  <img src="https://i.imgur.com/5JvGyWc.png" alt="oraxen" width="256">
+  <img src="https://i.imgur.com/5JvGyWc.png" alt="lifesteal" width="256">
   <br>
 </h1>
 
 <p align="center">
-    <a href="https://ls.przemus.xyz/">
-        <img href="https://ls.przemus.xyz/" alt="docs" src="https://img.shields.io/badge/docs-beta-brightgreen"/>
+    <a href="https://ls.przemus.xyz/" target="_blank">
+        <img href="https://ls.przemus.xyz/" alt="docs" src="https://img.shields.io/badge/docs-important?style=for-the-badge"/>
     </a>
-    <a href="https://www.paypal.me/devprzemus">
-        <img href="https://www.paypal.me/devprzemus" alt="docs" src="https://img.shields.io/badge/donate-paypal-brightgreen"/>
+    <a href="https://discord.gg/8sjwaQTHGC" alt="discord" target="_blank">
+        <img src="https://img.shields.io/badge/discord-informational?style=for-the-badge"/>
     </a>
-    <a href="https://www.spigotmc.org/resources/p-lifesteal.101967/">
-        <img alt="spigot" src="https://img.shields.io/badge/spigot-lifesteal-brightgreen"/>
+    <a href="https://www.spigotmc.org/resources/p-lifesteal.101967/" target="_blank">
+        <img alt="spigot" src="https://img.shields.io/badge/spigot-yellow?style=for-the-badge"/>
     </a>
-    <a href="https://discord.gg/8sjwaQTHGC" alt="discord">
-        <img src="https://img.shields.io/discord/974655539881574470?label=discord"/>
-    </a>
-    <a href="https://bstats.org/plugin/bukkit/P-LifeSteal" alt="servers">
-        <img src="https://img.shields.io/bstats/servers/15176?color=brightgreen"/>
-    </a>
-    <a href="https://bstats.org/plugin/bukkit/P-LifeSteal" alt="players">
-        <img src="https://img.shields.io/bstats/players/15176?color=brightgreen"/>
+    <a href="https://www.paypal.me/devprzemus" target="_blank">
+        <img href="https://www.paypal.me/devprzemus" alt="docs" src="https://img.shields.io/badge/donate-blueviolet?style=for-the-badge"/>
     </a>
 </p>
-
-## [Documentation](https://ls.przemus.xyz/)
-
-### **Click text above to open documentation.**
+<hr style="margin-bottom:-10px">
+<a href="https://ls.przemus.xyz/" target="_blank" >
+<h1 align="center" style="margin: 0px; margin-bottom:-15px">
+Documentation
+</h1>
+</a>
+<h2 align="center" style="margin: 0px">
+Click text above to open documentation.
+</h2>
 
 ## What is it?
 

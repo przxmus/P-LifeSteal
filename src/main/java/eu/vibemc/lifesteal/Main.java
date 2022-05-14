@@ -39,7 +39,7 @@ public final class Main extends JavaPlugin {
                     sender.sendMessage("§6§lhttps://github.com/dewPrzemuS/P-LifeSteal");
                     sender.sendMessage("§6§lhttps://www.spigotmc.org/resources/p-lifesteal.101967/");
                 })
-                .withSubcommand(new CommandAPICommand("heart")
+                .withSubcommand(new CommandAPICommand("hearts")
                         .withShortDescription("Command to manage hearts.")
                         .withSubcommand(new CommandAPICommand("check")
                                 .withPermission("lifesteal.heart.check")
@@ -135,7 +135,7 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        new UpdateChecker(this, 101967).getVersion(version -> {
+        new UpdateChecker(this).getVersion(version -> {
             if (this.getDescription().getVersion().equals(version)) {
                 Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + this.getDescription().getVersion() + "--------");
                 if (this.getDescription().getVersion().contains("Alpha") || this.getDescription().getVersion().contains("Beta")) {
@@ -177,6 +177,19 @@ public final class Main extends JavaPlugin {
         }
 
         registerRecipes();
+
+        // do every 30 minutes
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> {
+
+            new UpdateChecker(this).getVersion(version -> {
+                if (!this.getDescription().getVersion().equals(version)) {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + this.getDescription().getVersion() + "--------");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "- A NEW UPDATE HAS BEEN RELEASED! (" + version + ")");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "- Please download new version from SpigotMC or Github.");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + this.getDescription().getVersion() + "--------");
+                }
+            });
+        } , 0L, 36000L); //36000L
 
     }
 

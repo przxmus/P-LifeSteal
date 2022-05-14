@@ -19,8 +19,7 @@ public class PlayerInteract implements Listener {
                     Items.Heart.useHeart(player, player.getInventory().getItemInMainHand());
                 }
             }
-        } catch (NullPointerException ex) {
-            return;
+        } catch (NullPointerException ignored) {
         }
 
 
