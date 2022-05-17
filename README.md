@@ -17,6 +17,7 @@
     <a href="https://www.paypal.me/devprzemus" target="_blank">
         <img href="https://www.paypal.me/devprzemus" alt="docs" src="https://img.shields.io/badge/donate-blueviolet?style=for-the-badge"/>
     </a>
+    <img alt="docs" src="https://wakatime.com/badge/user/df5da6b0-e47d-4830-9381-6a2157613310/project/18b51dc6-ad4c-4bb0-b15b-b5c36498d6b3.svg?style=for-the-badge"/>
 </p>
 
 ## What is it?
