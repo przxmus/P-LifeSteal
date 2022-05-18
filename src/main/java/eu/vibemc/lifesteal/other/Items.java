@@ -1,5 +1,6 @@
 package eu.vibemc.lifesteal.other;
 
+import eu.vibemc.lifesteal.models.Ban;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
@@ -8,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class Items {
             return item.getItemMeta().getPersistentDataContainer().has(new NamespacedKey("lifesteal", "chance"), PersistentDataType.INTEGER);
         }
 
-        public static void useHeart(Player player, ItemStack item) {
+        public static void useHeart(Player player, ItemStack item) throws IOException {
             if (!Config.getBoolean("heartItem.enabled")) {
                 player.sendActionBar(Config.getMessage("itemDisabled"));
                 player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
@@ -46,14 +48,19 @@ public class Items {
             }
             // get chance
             int chance = getChance(item);
-            item.setAmount(item.getAmount() - 1);
             // generate random number between 0 and 100 and check if it is less than the chance
             int random = (int) (Math.random() * 100);
             if (random <= chance) {
-                player.setMaxHealth(player.getMaxHealth() + 2);
-                player.sendActionBar(Config.getMessage("heartReceived"));
-                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
+                if (Config.getInt("heartItem.addLimit") == 0 || Config.getInt("heartItem.addLimit") > player.getMaxHealth() + 2) {
+                    item.setAmount(item.getAmount() - 1);
+                    player.setMaxHealth(player.getMaxHealth() + 2);
+                    player.sendActionBar(Config.getMessage("heartReceived"));
+                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
+                } else {
+                    player.sendActionBar(Config.getMessage("maxHeartsFromExtraHeart").replace("${max}", String.valueOf(Config.getInt("heartItem.addLimit"))));
+                }
             } else {
+                item.setAmount(item.getAmount() - 1);
                 // create another chance
                 int secondRandom = (int) (Math.random() * 100);
                 if (secondRandom <= Config.getInt("heartItem.loseChance")) {
@@ -61,14 +68,7 @@ public class Items {
                     player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
                 } else {
                     if (player.getMaxHealth() - 2 <= 0) {
-                        if (Config.getBoolean("banOn0Hearts")) {
-                            // ban player
-                            player.banPlayerIP(Config.getMessage("noMoreHeartsBan"));
-                            if (Config.getBoolean("broadcastBanFrom0Hearts")) {
-                                // send message to all players
-                                player.getServer().broadcastMessage(Config.getMessage("bannedNoMoreHeartsBroadcast"));
-                            }
-                        }
+                        BanStorageUtil.createBan(player);
                     } else {
                         player.setMaxHealth(player.getMaxHealth() - 2);
                         player.sendActionBar(Config.getMessage("heartLost"));

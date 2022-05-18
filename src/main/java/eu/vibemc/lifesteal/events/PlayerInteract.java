@@ -7,10 +7,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import java.io.IOException;
+
 public class PlayerInteract implements Listener {
 
     @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent e) {
+    public void onPlayerInteract(PlayerInteractEvent e) throws IOException {
         Player player = e.getPlayer();
         Action action = e.getAction();
         try {

@@ -3,12 +3,11 @@ package eu.vibemc.lifesteal;
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.CommandAPIConfig;
-import dev.jorel.commandapi.arguments.ArgumentSuggestions;
-import dev.jorel.commandapi.arguments.IntegerArgument;
-import dev.jorel.commandapi.arguments.PlayerArgument;
-import dev.jorel.commandapi.arguments.StringArgument;
+import dev.jorel.commandapi.arguments.*;
+import eu.vibemc.lifesteal.events.AsyncPlayerPreLogin;
 import eu.vibemc.lifesteal.events.PlayerDeath;
 import eu.vibemc.lifesteal.events.PlayerInteract;
+import eu.vibemc.lifesteal.models.Ban;
 import eu.vibemc.lifesteal.other.*;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -16,6 +15,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public final class Main extends JavaPlugin {
@@ -28,6 +28,13 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onLoad() {
+        instance = this;
+        try {
+            BanStorageUtil.loadNotes();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         CommandAPI.onLoad(new CommandAPIConfig());
 
         new CommandAPICommand("lifesteal")
@@ -39,6 +46,38 @@ public final class Main extends JavaPlugin {
                     sender.sendMessage("§6§lhttps://github.com/dewPrzemuS/P-LifeSteal");
                     sender.sendMessage("§6§lhttps://www.spigotmc.org/resources/p-lifesteal.101967/");
                 })
+                .withSubcommand(new CommandAPICommand("bans")
+                        .withPermission("lifesteal.bans")
+                        .executes((sender, args) -> {
+                            sender.sendMessage("§6§lBans:");
+                            for (Ban ban : BanStorageUtil.findAllBans()) {
+                                sender.sendMessage("§c" + getServer().getOfflinePlayer(ban.getPlayerUUID()).getName());
+                            }
+                        })
+                        .withSubcommand(new CommandAPICommand("remove")
+                                .withPermission("lifesteal.bans.remove")
+                                .withArguments(new OfflinePlayerArgument("player"))
+                                .executes((sender, args) -> {
+                                    OfflinePlayer player = (OfflinePlayer) args[0];
+                                    try {
+                                        BanStorageUtil.deleteBan(player.getUniqueId());
+                                        if (player.getName() != null) {
+                                            sender.sendMessage(Config.getMessage("banRemoved").replace("${player}", player.getName()));
+                                        } else {
+                                            sender.sendMessage(Config.getMessage("playerNotFound"));
+                                        }
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                })))
+                .withSubcommand(new CommandAPICommand("help")
+                        .withShortDescription("Help command.")
+                        .executes((sender, args) -> {
+                            sender.sendMessage("§aAnswers to most questions can be found in the documentation:");
+                            sender.sendMessage("§6§lhttps://ls.przemus.xyz/");
+                            sender.sendMessage("§aIf you §c§ldon't §r§afind an answer to your question there, ask for help on discord:");
+                            sender.sendMessage("§6§lhttps://discord.gg/8sjwaQTHGC/");
+                        }))
                 .withSubcommand(new CommandAPICommand("hearts")
                         .withShortDescription("Command to manage hearts.")
                         .withSubcommand(new CommandAPICommand("check")
@@ -120,7 +159,7 @@ public final class Main extends JavaPlugin {
                             int chance = (int) args[2];
                             int amount = (int) args[3];
                             if (item.equalsIgnoreCase("extra_life")) {
-                                if (!player.hasPermission("lifesteal.give.extraheart")) {
+                                if (!sender.hasPermission("lifesteal.give.extraheart")) {
                                     return;
                                 }
                                 // loop amount times
@@ -161,12 +200,12 @@ public final class Main extends JavaPlugin {
 
         CommandAPI.onEnable(this);
         Metrics metrics = new Metrics(this, 15176);
-        instance = this;
         this.getConfig().options().copyDefaults();
         this.saveDefaultConfig();
 
         getServer().getPluginManager().registerEvents(new PlayerDeath(), this);
         getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
+        getServer().getPluginManager().registerEvents(new AsyncPlayerPreLogin(), this);
 
 
         if (Config.getBoolean("loot.enabled")) {
@@ -189,7 +228,7 @@ public final class Main extends JavaPlugin {
                     Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + this.getDescription().getVersion() + "--------");
                 }
             });
-        } , 0L, 36000L); //36000L
+        }, 0L, 36000L); //36000L
 
     }
 
