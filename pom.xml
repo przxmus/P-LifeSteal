@@ -13,10 +13,10 @@
 
     <description>Plugin for stealing lives, inspired by Polish server "Anarchia SMP".</description>
     <properties>
-        <java.version>16</java.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <url>https://vibemc.eu/</url>
+    <url>https://ls.przemus.xyz/</url>
 
     <build>
         <plugins>
