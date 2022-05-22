@@ -29,6 +29,7 @@ features by looking at the plugin [documentation](https://ls.przemus.xyz/).
 ## Features
 
 - Highly configurable.
+- Revive Book.
 - An item of extra heart with a unique chance of success.
 - Configurable extra heart recipe.
 - Ability to enable item of extra heart generation in minecraft generated structures.
