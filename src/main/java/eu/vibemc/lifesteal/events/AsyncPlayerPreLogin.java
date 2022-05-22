@@ -1,12 +1,9 @@
 package eu.vibemc.lifesteal.events;
 
-import eu.vibemc.lifesteal.other.BanStorageUtil;
+import eu.vibemc.lifesteal.bans.BanStorageUtil;
 import eu.vibemc.lifesteal.other.Config;
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.jetbrains.annotations.NotNull;
 

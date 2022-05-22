@@ -1,6 +1,6 @@
 package eu.vibemc.lifesteal.events;
 
-import eu.vibemc.lifesteal.other.BanStorageUtil;
+import eu.vibemc.lifesteal.bans.BanStorageUtil;
 import eu.vibemc.lifesteal.other.Config;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -24,7 +24,7 @@ public class PlayerDeath implements Listener {
                     // remove 2 from max health of killed player
                     player.setMaxHealth(player.getMaxHealth() - 2);
                     // send actionbar to killed player
-                    player.sendActionBar(Config.getMessage("heartLost"));
+                    player.sendMessage(Config.getMessage("heartLost"));
                     // send thunder sound to killed player
                     player.playSound(player.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 100, 2);
                 }
@@ -48,7 +48,7 @@ public class PlayerDeath implements Listener {
                 // remove 2 from max health of killed player
                 player.setMaxHealth(player.getMaxHealth() - 2);
                 // send actionbar to killed player
-                player.sendActionBar(Config.getMessage("heartLost"));
+                player.sendMessage(Config.getMessage("heartLost"));
                 // send thunder sound to killed player
                 player.playSound(player.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 100, 2);
             }

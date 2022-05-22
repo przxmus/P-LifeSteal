@@ -33,7 +33,7 @@ public class Config {
         return ChatColor.translateAlternateColorCodes('&', Main.getInstance().getConfig().getString("messages." + path));
     }
 
-    public static Component textComponentFromString(final @NonNull String content) {
+    public static Component textComponentFromString(@NonNull final String content) {
         return Component.text(content);
     }
 

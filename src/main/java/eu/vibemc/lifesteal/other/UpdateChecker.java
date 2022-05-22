@@ -1,6 +1,8 @@
 package eu.vibemc.lifesteal.other;
 
+import eu.vibemc.lifesteal.Main;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -21,6 +23,48 @@ public class UpdateChecker {
 
     public UpdateChecker(JavaPlugin plugin) {
         this.plugin = plugin;
+    }
+
+    public static void init() {
+        new UpdateChecker(Main.getInstance()).getVersion(version -> {
+            if (Main.getInstance().getDescription().getVersion().equals(version)) {
+                Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + Main.getInstance().getDescription().getVersion() + "--------");
+                if (Main.getInstance().getDescription().getVersion().contains("Alpha") || Main.getInstance().getDescription().getVersion().contains("Beta")) {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "- DO NOT USE THIS PLUGIN IN PRODUCTION!");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "- SOME FEATURES ARE NOT FINISHED YET!");
+                }
+                Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "- You are up to date.");
+                Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "- Thank you for using my plugin!");
+                Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + Main.getInstance().getDescription().getVersion() + "--------");
+
+            } else {
+                Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + Main.getInstance().getDescription().getVersion() + "--------");
+                if (Main.getInstance().getDescription().getVersion().contains("Alpha") || Main.getInstance().getDescription().getVersion().contains("Beta")) {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "- DO NOT USE THIS PLUGIN IN PRODUCTION!");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "- SOME FEATURES ARE NOT FINISHED YET!");
+                }
+                Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "- There is a newer version than yours! (" + version + ")");
+                Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "- Please download new version from SpigotMC or Github.");
+                Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "- Thank you for using my plugin!");
+                Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + Main.getInstance().getDescription().getVersion() + "--------");
+            }
+        });
+
+        Main.getInstance().getServer().getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), () -> {
+            new UpdateChecker(Main.getInstance()).getVersion(version -> {
+                if (!Main.getInstance().getDescription().getVersion().equals(version)) {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + Main.getInstance().getDescription().getVersion() + "--------");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "- A NEW UPDATE HAS BEEN RELEASED! (" + version + ")");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "- Please download new version from SpigotMC or Github.");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + Main.getInstance().getDescription().getVersion() + "--------");
+                    Bukkit.getOnlinePlayers().forEach(player -> {
+                        if (player.hasPermission("lifesteal.update") || player.isOp()) {
+                            player.sendMessage("§a§lP-LifeSteal > §c§lA NEW UPDATE HAS BEEN RELEASED! §6(" + version + ")");
+                        }
+                    });
+                }
+            });
+        }, 0L, 36000L);
     }
 
     public void getVersion(final Consumer<String> consumer) {

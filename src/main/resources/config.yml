@@ -31,6 +31,16 @@ heartItem:
   loseChance: 50
   addLimit: 0
 
+reviveBook:
+  enabled: true
+  name: "&c&lRevive Book"
+  material: "ENCHANTED_BOOK"
+  inventory-title: "&a&lRevive player!"
+  lore:
+    - "&6Revives targeted player!"
+  skull-lore:
+    - "&aPress on the head to revive."
+
 killHeartLimit: 0
 removeHeartOnlyIfKilledByPlayer: false
 banOn0Hearts: true
@@ -41,6 +51,7 @@ recipe:
   recipes:
     1:
       recipe-enabled: true
+      item: "extra_heart"
       shaped: true
       extraHeartItemUseSuccess: 100
       items:
@@ -53,6 +64,21 @@ recipe:
         - "DIAMOND_BLOCK"
         - "DIAMOND_BLOCK"
         - "DIAMOND_BLOCK"
+    2:
+      recipe-enabled: true
+      item: "revive_book"
+      shaped: true
+      items:
+        - "TOTEM_OF_UNDYING"
+        - "TOTEM_OF_UNDYING"
+        - "TOTEM_OF_UNDYING"
+        - "ENCHANTED_GOLDEN_APPLE"
+        - "BOOK"
+        - "ENCHANTED_GOLDEN_APPLE"
+        - "TOTEM_OF_UNDYING"
+        - "TOTEM_OF_UNDYING"
+        - "TOTEM_OF_UNDYING"
+
 
 loot:
   enabled: true
@@ -60,12 +86,15 @@ loot:
     world:
       chanceForHeartToGenerate: 50
       heartAddChance: 50
+      chanceForReviveBookToGenerate: 50
     world_nether:
       chanceForHeartToGenerate: 75
       heartAddChance: 75
+      chanceForReviveBookToGenerate: 75
     world_the_end:
       chanceForHeartToGenerate: 100
       heartAddChance: 100
+      chanceForReviveBookToGenerate: 100
 
 messages:
   heartReceived: "&a&lYou've received an extra heart!"
@@ -87,5 +116,15 @@ messages:
   heartCheck: "&e&l${player} has ${amount}x hearts."
   banRemoved: "&a&lYou've removed ban from ${player}."
   playerNotFound: "&c&lPlayer not found."
+  playerNotBanned: "&c&lThis player is not banned."
+  playerNotDead: "&c&lThis player has not been eliminated, so he cannot be revived."
+  playerRevived: "&a&lYou have revived &6&l${player}&a&l!"
   maxHeartsFromExtraHeart: "&c&lYou can't get more than ${max}x hearts from an extra heart."
   maxHearts: "&c&lYou can't get more than ${max}x hearts."
+  reviveBookQuestion: "&6&lWho do you want to revive?\n&7&oType the player's name in the chat."
+  previousPage: "&a&l← Previous Page"
+  previousPageLore: "&aClick to move back to page ${page}."
+  currentPage: "&7&lPage ${currentPage} of ${maxPage}"
+  currentPageLore: "&7You are currently viewing page ${page}."
+  nextPage: "&a&lNext Page →"
+  nextPageLore: "&aClick to move forward to page ${page}."

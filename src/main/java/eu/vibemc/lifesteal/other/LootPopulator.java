@@ -54,7 +54,10 @@ public class LootPopulator extends BlockPopulator {
                     Main.getInstance().getConfig().getConfigurationSection("loot.worlds").getKeys(false).forEach(worldName -> {
                         if (worldName.equals(chunk.getWorld().getName())) {
                             if (random <= Config.getInt("loot.worlds." + worldName + ".chanceForHeartToGenerate")) {
-                                inventory.addItem(Items.Heart.getHeartItem(Config.getInt("loot.worlds." + worldName + ".heartAddChance")));
+                                inventory.addItem(Items.ExtraHeart.getExtraHeart(Config.getInt("loot.worlds." + worldName + ".heartAddChance")));
+                            }
+                            if (random <= Config.getInt("loot.worlds." + worldName + ".chanceForReviveBookToGenerate")) {
+                                inventory.addItem(Items.ReviveBook.getReviveBook());
                             }
                         }
                     });

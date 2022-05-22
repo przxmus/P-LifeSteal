@@ -17,13 +17,14 @@ public class PlayerInteract implements Listener {
         Action action = e.getAction();
         try {
             if (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) {
-                if (Items.Heart.isHeart(player.getInventory().getItemInMainHand())) {
-                    Items.Heart.useHeart(player, player.getInventory().getItemInMainHand());
+                if (Items.ExtraHeart.isExtraHeart(player.getInventory().getItemInMainHand())) {
+                    Items.ExtraHeart.useExtraHeart(player, player.getInventory().getItemInMainHand());
+                } else if (Items.ReviveBook.isReviveBook(player.getInventory().getItemInMainHand())) {
+                    Items.ReviveBook.useReviveBook(player, player.getInventory().getItemInMainHand());
                 }
             }
         } catch (NullPointerException ignored) {
         }
-
 
     }
 }

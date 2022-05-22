@@ -1,8 +1,10 @@
-package eu.vibemc.lifesteal.other;
+package eu.vibemc.lifesteal.bans;
 
 import com.google.gson.Gson;
 import eu.vibemc.lifesteal.Main;
-import eu.vibemc.lifesteal.models.Ban;
+import eu.vibemc.lifesteal.bans.models.Ban;
+import eu.vibemc.lifesteal.other.Config;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.io.*;
@@ -16,12 +18,12 @@ public class BanStorageUtil {
     private static ArrayList<Ban> bans = new ArrayList<>();
 
     public static Ban createBan(Player player) throws IOException {
-        if (getBan(player.getUniqueId()) != null) {
+        if (BanStorageUtil.getBan(player.getUniqueId()) != null) {
             return null;
         }
         Ban ban = new Ban(player.getUniqueId());
-        bans.add(ban);
-        saveBans();
+        BanStorageUtil.bans.add(ban);
+        BanStorageUtil.saveBans();
         if (player.isOnline()) {
             if (Config.getBoolean("banOn0Hearts")) {
                 player.kickPlayer(Config.getMessage("noMoreHeartsBan"));
@@ -33,8 +35,13 @@ public class BanStorageUtil {
         return ban;
     }
 
+
+    public static OfflinePlayer getOfflinePlayerByBan(Ban ban) {
+        return Main.getInstance().getServer().getOfflinePlayer(ban.getPlayerUUID());
+    }
+
     public static Ban getBan(UUID uuid) {
-        for (Ban ban : bans) {
+        for (Ban ban : BanStorageUtil.bans) {
             if (ban.getPlayerUUID().equals(uuid)) {
                 return ban;
             }
@@ -42,9 +49,13 @@ public class BanStorageUtil {
         return null;
     }
 
-    public static void deleteBan(UUID uuid) throws IOException {
-        bans.remove(getBan(uuid));
-        saveBans();
+    public static boolean deleteBan(UUID uuid) throws IOException {
+        if (BanStorageUtil.getBan(uuid) == null) {
+            return false;
+        }
+        BanStorageUtil.bans.remove(BanStorageUtil.getBan(uuid));
+        BanStorageUtil.saveBans();
+        return true;
     }
 
     public static void saveBans() throws IOException {
@@ -54,24 +65,24 @@ public class BanStorageUtil {
         file.createNewFile();
         Writer writer = null;
         writer = new FileWriter(file, false);
-        gson.toJson(bans, writer);
+        gson.toJson(BanStorageUtil.bans, writer);
         writer.flush();
         writer.close();
     }
 
-    public static void loadNotes() throws IOException {
+    public static void loadBans() throws IOException {
 
         Gson gson = new Gson();
         File file = new File(Main.getInstance().getDataFolder().getAbsolutePath() + "/bans.json");
         if (file.exists()) {
             Reader reader = new FileReader(file);
             Ban[] b = gson.fromJson(reader, Ban[].class);
-            bans = new ArrayList<>(Arrays.asList(b));
+            BanStorageUtil.bans = new ArrayList<>(Arrays.asList(b));
         }
 
     }
 
     public static List<Ban> findAllBans() {
-        return bans;
+        return BanStorageUtil.bans;
     }
 }
