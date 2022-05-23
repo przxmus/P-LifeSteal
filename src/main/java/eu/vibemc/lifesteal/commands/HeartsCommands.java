@@ -1,0 +1,74 @@
+package eu.vibemc.lifesteal.commands;
+
+import dev.jorel.commandapi.CommandAPICommand;
+import dev.jorel.commandapi.arguments.IntegerArgument;
+import dev.jorel.commandapi.arguments.PlayerArgument;
+import eu.vibemc.lifesteal.other.Config;
+import org.bukkit.entity.Player;
+
+public class HeartsCommands {
+    public static CommandAPICommand getAllHeartsCommands() {
+        return new CommandAPICommand("hearts")
+                .withShortDescription("Command to manage hearts.")
+                .withSubcommand(getCheckHeartsCommand())
+                .withSubcommand(getSetHeartsCommand())
+                .withSubcommand(getAddHeartsCommand())
+                .withSubcommand(getRemoveHeartsCommand());
+    }
+
+    private static CommandAPICommand getAddHeartsCommand() {
+        return new CommandAPICommand("add")
+                .withPermission("lifesteal.heart.manage")
+                .withArguments(new PlayerArgument("player"), new IntegerArgument("amount"))
+                .withShortDescription("Add hearts to player.")
+                .executes((sender, args) -> {
+                    Player player = (Player) args[0];
+                    int amount = (int) args[1];
+                    player.setMaxHealth(player.getMaxHealth() + amount);
+                    player.sendMessage(Config.getMessage("heartAdded").replace("${amount}", String.valueOf(amount)));
+                    sender.sendMessage(Config.getMessage("heartAddedAdmin").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
+                });
+    }
+
+    private static CommandAPICommand getSetHeartsCommand() {
+        return new CommandAPICommand("set")
+                .withPermission("lifesteal.heart.manage")
+                .withArguments(new PlayerArgument("player"), new IntegerArgument("amount"))
+                .withShortDescription("Sets amount of player's hearts.")
+                .executes((sender, args) -> {
+                    Player player = (Player) args[0];
+                    int amount = (int) args[1];
+                    player.setMaxHealth(amount);
+                    player.sendMessage(Config.getMessage("heartSetted").replace("${amount}", String.valueOf(amount)));
+                    sender.sendMessage(Config.getMessage("heartSettedAdmin").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
+
+                });
+    }
+
+    private static CommandAPICommand getRemoveHeartsCommand() {
+        return new CommandAPICommand("remove")
+                .withPermission("lifesteal.heart.manage")
+                .withArguments(new PlayerArgument("player"), new IntegerArgument("amount"))
+                .withShortDescription("Removes hearts from player.")
+                .executes((sender, args) -> {
+                    Player player = (Player) args[0];
+                    int amount = (int) args[1];
+                    player.setMaxHealth(player.getMaxHealth() - amount);
+                    player.sendMessage(Config.getMessage("heartRemoved").replace("${amount}", String.valueOf(amount)));
+                    sender.sendMessage(Config.getMessage("heartRemovedAdmin").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
+
+                });
+    }
+
+    private static CommandAPICommand getCheckHeartsCommand() {
+        return new CommandAPICommand("check")
+                .withPermission("lifesteal.heart.check")
+                .withShortDescription("Check how many hearts player have.")
+                .withArguments(new PlayerArgument("player"))
+                .executes((sender, args) -> {
+                    Player player = (Player) args[0];
+                    int amount = (int) player.getMaxHealth();
+                    sender.sendMessage(Config.getMessage("heartCheck").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
+                });
+    }
+}
