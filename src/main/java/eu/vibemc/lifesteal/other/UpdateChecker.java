@@ -59,7 +59,7 @@ public class UpdateChecker {
                     Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "--------P-LifeSteal-" + Main.getInstance().getDescription().getVersion() + "--------");
                     Bukkit.getOnlinePlayers().forEach(player -> {
                         if (player.hasPermission("lifesteal.update") || player.isOp()) {
-                            player.sendMessage("§a§lP-LifeSteal > §c§lA NEW UPDATE HAS BEEN RELEASED! §6(" + version + ")");
+                            player.sendMessage("§a§lP-LifeSteal §7§l> §c§lA NEW UPDATE HAS BEEN RELEASED! §6(" + version + ")");
                         }
                     });
                 }

@@ -54,6 +54,7 @@ recipe:
       item: "extra_heart"
       shaped: true
       extraHeartItemUseSuccess: 100
+      discover: false
       items:
         - "DIAMOND_BLOCK"
         - "DIAMOND_BLOCK"
@@ -68,6 +69,7 @@ recipe:
       recipe-enabled: true
       item: "revive_book"
       shaped: true
+      discover: true
       items:
         - "TOTEM_OF_UNDYING"
         - "TOTEM_OF_UNDYING"

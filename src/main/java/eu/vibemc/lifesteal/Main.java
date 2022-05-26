@@ -4,9 +4,7 @@ import com.samjakob.spigui.SpiGUI;
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIConfig;
 import eu.vibemc.lifesteal.bans.BanStorageUtil;
-import eu.vibemc.lifesteal.events.AsyncPlayerPreLogin;
-import eu.vibemc.lifesteal.events.PlayerDeath;
-import eu.vibemc.lifesteal.events.PlayerInteract;
+import eu.vibemc.lifesteal.events.*;
 import eu.vibemc.lifesteal.other.Config;
 import eu.vibemc.lifesteal.other.LootPopulator;
 import eu.vibemc.lifesteal.other.Metrics;
@@ -53,6 +51,8 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerDeath(), this);
         getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
         getServer().getPluginManager().registerEvents(new AsyncPlayerPreLogin(), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
+        getServer().getPluginManager().registerEvents(new PlayerQuit(), this);
 
         if (Config.getBoolean("loot.enabled")) {
             for (World world : Bukkit.getServer().getWorlds()) {

@@ -5,7 +5,9 @@ import eu.vibemc.lifesteal.Main;
 import eu.vibemc.lifesteal.other.Config;
 import eu.vibemc.lifesteal.other.LootPopulator;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 
 import static eu.vibemc.lifesteal.other.Items.Recipes.registerRecipes;
 import static eu.vibemc.lifesteal.other.Items.Recipes.unregisterRecipes;
@@ -41,6 +43,18 @@ public class MainCommands {
                 .withPermission("lifesteal.reload")
                 .withShortDescription("Reloads config.")
                 .executes((sender, args) -> {
+                    if (Config.getBoolean("recipe.enabled")) {
+                        Main.getInstance().getConfig().getConfigurationSection("recipe.recipes").getKeys(false).forEach(recipe -> {
+                            if (Config.getBoolean("recipe.recipes." + recipe + ".recipe-enabled")) {
+                                if (Config.getBoolean("recipe.recipes." + recipe + ".discover")) {
+                                    String itemName = Config.getString("recipe.recipes." + recipe + ".item");
+                                    for (Player player : Bukkit.getOnlinePlayers()) {
+                                        player.undiscoverRecipe(new NamespacedKey("lifesteal", itemName + recipe));
+                                    }
+                                }
+                            }
+                        });
+                    }
                     unregisterRecipes();
                     for (World world : Bukkit.getServer().getWorlds()) {
                         world.getPopulators().removeIf(blockPopulator -> blockPopulator instanceof LootPopulator);
@@ -48,6 +62,18 @@ public class MainCommands {
                     Main.getInstance().reloadConfig();
                     sender.sendMessage(Config.getMessage("configReloaded"));
                     registerRecipes();
+                    if (Config.getBoolean("recipe.enabled")) {
+                        Main.getInstance().getConfig().getConfigurationSection("recipe.recipes").getKeys(false).forEach(recipe -> {
+                            if (Config.getBoolean("recipe.recipes." + recipe + ".recipe-enabled")) {
+                                if (Config.getBoolean("recipe.recipes." + recipe + ".discover")) {
+                                    String itemName = Config.getString("recipe.recipes." + recipe + ".item");
+                                    for (Player player : Bukkit.getOnlinePlayers()) {
+                                        player.discoverRecipe(new NamespacedKey("lifesteal", itemName + recipe));
+                                    }
+                                }
+                            }
+                        });
+                    }
                     sender.sendMessage(Config.getMessage("recipesReloaded"));
                     if (Config.getBoolean("loot.enabled")) {
                         for (World world : Bukkit.getServer().getWorlds()) {
