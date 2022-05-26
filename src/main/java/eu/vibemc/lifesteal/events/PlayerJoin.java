@@ -18,7 +18,9 @@ public class PlayerJoin implements Listener {
         Player player = e.getPlayer();
         if (player.hasPermission("lifesteal.update") || player.isOp()) {
             new UpdateChecker(Main.getInstance()).getVersion(version -> {
-                player.sendMessage("§a§lP-LifeSteal §7§l> §c§lA NEW UPDATE HAS BEEN RELEASED! §6(" + version + ")");
+                if (!Main.getInstance().getDescription().getVersion().equals(version)) {
+                    player.sendMessage("§a§lP-LifeSteal §7§l> §c§lA NEW UPDATE HAS BEEN RELEASED! §6(" + version + ")");
+                }
             });
         }
         if (Config.getBoolean("recipe.enabled")) {

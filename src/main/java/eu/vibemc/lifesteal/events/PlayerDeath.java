@@ -32,11 +32,11 @@ public class PlayerDeath implements Listener {
                     // add 2 to max health of killer
                     killer.setMaxHealth(killer.getMaxHealth() + 2);
                     // send actionbar to killer
-                    killer.sendActionBar(Config.getMessage("heartGained"));
+                    killer.sendMessage(Config.getMessage("heartGained"));
                     // send level up sound to killer
                     killer.playSound(killer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
                 } else {
-                    killer.sendActionBar(Config.getMessage("maxHearts").replace("${max}", String.valueOf(Config.getInt("killHeartLimit"))));
+                    killer.sendMessage(Config.getMessage("maxHearts").replace("${max}", String.valueOf(Config.getInt("killHeartLimit"))));
                 }
             } else {
                 return;
@@ -57,11 +57,11 @@ public class PlayerDeath implements Listener {
                     // add 2 to max health of killer
                     killer.setMaxHealth(killer.getMaxHealth() + 2);
                     // send actionbar to killer
-                    killer.sendActionBar(Config.getMessage("heartGained"));
+                    killer.sendMessage(Config.getMessage("heartGained"));
                     // send level up sound to killer
                     killer.playSound(killer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
                 } else {
-                    killer.sendActionBar(Config.getMessage("maxHearts").replace("${max}", String.valueOf(Config.getInt("killHeartLimit"))));
+                    killer.sendMessage(Config.getMessage("maxHearts").replace("${max}", String.valueOf(Config.getInt("killHeartLimit"))));
                 }
             }
         }
