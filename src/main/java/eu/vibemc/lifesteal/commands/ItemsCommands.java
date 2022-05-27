@@ -10,8 +10,8 @@ public class ItemsCommands {
     public static CommandAPICommand getAllItemsCommands() {
         return new CommandAPICommand("give")
                 .withShortDescription("Gives you specified item.")
-                .withSubcommand(getGiveReviveBookCommand())
-                .withSubcommand(getGiveExtraHeartCommand());
+                .withSubcommand(ItemsCommands.getGiveReviveBookCommand())
+                .withSubcommand(ItemsCommands.getGiveExtraHeartCommand());
     }
 
     private static CommandAPICommand getGiveExtraHeartCommand() {

@@ -10,7 +10,7 @@ public class Ban {
     }
 
     public UUID getPlayerUUID() {
-        return playerUUID;
+        return this.playerUUID;
     }
 
     public void setPlayerUUID(UUID playerUUID) {

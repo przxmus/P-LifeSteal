@@ -25,12 +25,12 @@ public final class Main extends JavaPlugin {
     private static Main instance;
 
     public static Main getInstance() {
-        return instance;
+        return Main.instance;
     }
 
     @Override
     public void onLoad() {
-        instance = this;
+        Main.instance = this;
         CommandAPI.onLoad(new CommandAPIConfig().silentLogs(false));
         try {
             BanStorageUtil.loadBans();
@@ -43,17 +43,17 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        Main.spiGUI = new SpiGUI(this);
+        spiGUI = new SpiGUI(this);
         CommandAPI.onEnable(this);
         Metrics metrics = new Metrics(this, 15176);
-        this.getConfig().options().copyDefaults();
-        this.saveDefaultConfig();
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
 
-        getServer().getPluginManager().registerEvents(new PlayerDeath(), this);
-        getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
-        getServer().getPluginManager().registerEvents(new AsyncPlayerPreLogin(), this);
-        getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
-        getServer().getPluginManager().registerEvents(new PlayerQuit(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerDeath(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
+        this.getServer().getPluginManager().registerEvents(new AsyncPlayerPreLogin(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerQuit(), this);
 
         if (Config.getBoolean("loot.enabled")) {
             for (World world : Bukkit.getServer().getWorlds()) {

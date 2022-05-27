@@ -1,7 +1,6 @@
 package eu.vibemc.lifesteal.other;
 
 import eu.vibemc.lifesteal.Main;
-import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -33,13 +32,9 @@ public class Config {
         return ChatColor.translateAlternateColorCodes('&', Main.getInstance().getConfig().getString("messages." + path));
     }
 
-    public static Component textComponentFromString(@NonNull final String content) {
-        return Component.text(content);
-    }
-
     public static String translateHexCodes(String textToTranslate) {
 
-        Matcher matcher = HEX_PATTERN.matcher(textToTranslate);
+        Matcher matcher = Config.HEX_PATTERN.matcher(textToTranslate);
         StringBuilder builder = new StringBuilder();
 
         while (matcher.find()) {

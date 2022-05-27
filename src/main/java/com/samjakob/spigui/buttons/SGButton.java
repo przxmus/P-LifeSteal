@@ -46,7 +46,7 @@ public class SGButton {
      * @return The listener to be called when the button is clicked.
      */
     public SGButtonListener getListener() {
-        return this.listener;
+        return listener;
     }
 
     /**
@@ -65,7 +65,7 @@ public class SGButton {
      * @return The icon ({@link ItemStack}) that will be used to represent the button.
      */
     public ItemStack getIcon() {
-        return this.icon;
+        return icon;
     }
 
     /**

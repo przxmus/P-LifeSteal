@@ -12,7 +12,6 @@ import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.IllegalPluginAccessException;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
@@ -20,18 +19,18 @@ public class LootPopulator extends BlockPopulator {
 
     private final Main plugin;
 
-    public LootPopulator(@NotNull final Main plugin) {
+    public LootPopulator(final Main plugin) {
         this.plugin = plugin;
     }
 
-    public void populate(@NotNull final World world,
-                         @NotNull final Random random,
-                         @NotNull final Chunk chunk) {
+    public void populate(final World world,
+                         final Random random,
+                         final Chunk chunk) {
         for (Entity entity : chunk.getEntities()) {
             if (!(entity instanceof StorageMinecart minecart)) {
                 continue;
             }
-            modifyInventory(minecart.getInventory(), chunk);
+            this.modifyInventory(minecart.getInventory(), chunk);
         }
 
         for (BlockState state : chunk.getTileEntities()) {
@@ -40,15 +39,15 @@ public class LootPopulator extends BlockPopulator {
                 continue;
             }
             Inventory inventory = chestState.getBlockInventory();
-            modifyInventory(inventory, chunk);
+            this.modifyInventory(inventory, chunk);
         }
     }
 
-    public void modifyInventory(@NotNull final Inventory inventory,
-                                @NotNull final Chunk chunk) {
+    public void modifyInventory(final Inventory inventory,
+                                final Chunk chunk) {
 
         try {
-            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
                 if (chunk.isLoaded()) {
                     int random = (int) (Math.random() * 100);
                     Main.getInstance().getConfig().getConfigurationSection("loot.worlds").getKeys(false).forEach(worldName -> {

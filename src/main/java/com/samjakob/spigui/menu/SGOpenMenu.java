@@ -14,11 +14,11 @@ public class SGOpenMenu {
     }
 
     public SGMenu getGUI() {
-        return gui;
+        return this.gui;
     }
 
     public Player getPlayer() {
-        return player;
+        return this.player;
     }
 
 }

@@ -47,7 +47,7 @@ public enum ItemDataColor {
      * @return The {@link ItemDataColor} associated with <code>value</code> or null if there isn't one.
      */
     public static ItemDataColor getByValue(final short value) {
-        for (final ItemDataColor color : values()) {
+        for (final ItemDataColor color : ItemDataColor.values()) {
             if (value == color.value) return color;
         }
 
@@ -60,7 +60,7 @@ public enum ItemDataColor {
      * @return The durability value as a 'short'.
      */
     public short getValue() {
-        return this.value;
+        return value;
     }
 
 }

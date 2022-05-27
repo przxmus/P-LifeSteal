@@ -18,12 +18,12 @@ public class BanStorageUtil {
     private static ArrayList<Ban> bans = new ArrayList<>();
 
     public static Ban createBan(Player player) throws IOException {
-        if (BanStorageUtil.getBan(player.getUniqueId()) != null) {
+        if (getBan(player.getUniqueId()) != null) {
             return null;
         }
         Ban ban = new Ban(player.getUniqueId());
-        BanStorageUtil.bans.add(ban);
-        BanStorageUtil.saveBans();
+        bans.add(ban);
+        saveBans();
         if (player.isOnline()) {
             if (Config.getBoolean("banOn0Hearts")) {
                 player.kickPlayer(Config.getMessage("noMoreHeartsBan"));
@@ -41,7 +41,7 @@ public class BanStorageUtil {
     }
 
     public static Ban getBan(UUID uuid) {
-        for (Ban ban : BanStorageUtil.bans) {
+        for (Ban ban : bans) {
             if (ban.getPlayerUUID().equals(uuid)) {
                 return ban;
             }
@@ -50,11 +50,11 @@ public class BanStorageUtil {
     }
 
     public static boolean deleteBan(UUID uuid) throws IOException {
-        if (BanStorageUtil.getBan(uuid) == null) {
+        if (getBan(uuid) == null) {
             return false;
         }
-        BanStorageUtil.bans.remove(BanStorageUtil.getBan(uuid));
-        BanStorageUtil.saveBans();
+        bans.remove(getBan(uuid));
+        saveBans();
         return true;
     }
 
@@ -65,7 +65,7 @@ public class BanStorageUtil {
         file.createNewFile();
         Writer writer = null;
         writer = new FileWriter(file, false);
-        gson.toJson(BanStorageUtil.bans, writer);
+        gson.toJson(bans, writer);
         writer.flush();
         writer.close();
     }
@@ -77,12 +77,12 @@ public class BanStorageUtil {
         if (file.exists()) {
             Reader reader = new FileReader(file);
             Ban[] b = gson.fromJson(reader, Ban[].class);
-            BanStorageUtil.bans = new ArrayList<>(Arrays.asList(b));
+            bans = new ArrayList<>(Arrays.asList(b));
         }
 
     }
 
     public static List<Ban> findAllBans() {
-        return BanStorageUtil.bans;
+        return bans;
     }
 }

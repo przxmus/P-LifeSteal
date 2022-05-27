@@ -41,7 +41,7 @@ public class ItemBuilder {
      * @param material The {@link Material} to use when creating the stack.
      */
     public ItemBuilder(final Material material) {
-        stack = new ItemStack(material);
+        this.stack = new ItemStack(material);
     }
 
     /**
@@ -62,7 +62,7 @@ public class ItemBuilder {
      * @return The {@link ItemBuilder} instance.
      */
     public ItemBuilder type(final Material material) {
-        this.stack.setType(material);
+        stack.setType(material);
         return this;
     }
 
@@ -72,7 +72,7 @@ public class ItemBuilder {
      * @return The {@link Material} of the stack.
      */
     public Material getType() {
-        return this.stack.getType();
+        return stack.getType();
     }
 
     /**
@@ -84,9 +84,9 @@ public class ItemBuilder {
      * @return The {@link ItemBuilder} instance.
      */
     public ItemBuilder name(final String name) {
-        final ItemMeta stackMeta = this.stack.getItemMeta();
+        final ItemMeta stackMeta = stack.getItemMeta();
         stackMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
-        this.stack.setItemMeta(stackMeta);
+        stack.setItemMeta(stackMeta);
         return this;
     }
 
@@ -104,8 +104,8 @@ public class ItemBuilder {
      * @return The item's display name as returned from its {@link ItemMeta}.
      */
     public String getName() {
-        if (!this.stack.hasItemMeta() || !this.stack.getItemMeta().hasDisplayName()) return null;
-        return this.stack.getItemMeta().getDisplayName();
+        if (!stack.hasItemMeta() || !stack.getItemMeta().hasDisplayName()) return null;
+        return stack.getItemMeta().getDisplayName();
     }
 
     /**
@@ -115,7 +115,7 @@ public class ItemBuilder {
      * @return The {@link ItemBuilder} instance.
      */
     public ItemBuilder amount(final int amount) {
-        this.stack.setAmount(amount);
+        stack.setAmount(amount);
         return this;
     }
 
@@ -125,7 +125,7 @@ public class ItemBuilder {
      * @return The amount of items in the stack.
      */
     public int getAmount() {
-        return this.stack.getAmount();
+        return stack.getAmount();
     }
 
     /**
@@ -136,7 +136,7 @@ public class ItemBuilder {
      * @return The {@link ItemBuilder} instance.
      */
     public ItemBuilder lore(final String... lore) {
-        return this.lore(Arrays.asList(lore));
+        return lore(Arrays.asList(lore));
     }
 
     /**
@@ -155,9 +155,9 @@ public class ItemBuilder {
             lore.set(i, ChatColor.translateAlternateColorCodes('&', lore.get(i)));
         }
 
-        final ItemMeta stackMeta = this.stack.getItemMeta();
+        final ItemMeta stackMeta = stack.getItemMeta();
         stackMeta.setLore(lore);
-        this.stack.setItemMeta(stackMeta);
+        stack.setItemMeta(stackMeta);
         return this;
     }
 
@@ -171,8 +171,8 @@ public class ItemBuilder {
      * @return The lore of the item.
      */
     public List<String> getLore() {
-        if (!this.stack.hasItemMeta() || !this.stack.getItemMeta().hasLore()) return null;
-        return this.stack.getItemMeta().getLore();
+        if (!stack.hasItemMeta() || !stack.getItemMeta().hasLore()) return null;
+        return stack.getItemMeta().getLore();
     }
 
     /**
@@ -187,7 +187,7 @@ public class ItemBuilder {
      * @return The {@link ItemBuilder} instance.
      */
     public ItemBuilder color(final ItemDataColor color) {
-        return this.durability(color.getValue());
+        return durability(color.getValue());
     }
 
     /**
@@ -197,7 +197,7 @@ public class ItemBuilder {
      * @return The {@link ItemBuilder} instance.
      */
     public ItemBuilder data(final short data) {
-        return this.durability(data);
+        return durability(data);
     }
 
     /**
@@ -207,7 +207,7 @@ public class ItemBuilder {
      * @return The updated {@link ItemBuilder} object.
      */
     public ItemBuilder durability(final short durability) {
-        this.stack.setDurability(durability);
+        stack.setDurability(durability);
         return this;
     }
 
@@ -217,7 +217,7 @@ public class ItemBuilder {
      * @return The durability of the item.
      */
     public short getDurability() {
-        return this.stack.getDurability();
+        return stack.getDurability();
     }
 
     /**
@@ -229,7 +229,7 @@ public class ItemBuilder {
      * @return The appropriate {@link ItemDataColor} of the item or null.
      */
     public ItemDataColor getColor() {
-        return ItemDataColor.getByValue(this.stack.getDurability());
+        return ItemDataColor.getByValue(stack.getDurability());
     }
 
     /**
@@ -243,7 +243,7 @@ public class ItemBuilder {
      * @return The {@link ItemBuilder} instance.
      */
     public ItemBuilder enchant(final Enchantment enchantment, final int level) {
-        this.stack.addUnsafeEnchantment(enchantment, level);
+        stack.addUnsafeEnchantment(enchantment, level);
         return this;
     }
 
@@ -254,7 +254,7 @@ public class ItemBuilder {
      * @return The {@link ItemBuilder} instance.
      */
     public ItemBuilder unenchant(final Enchantment enchantment) {
-        this.stack.removeEnchantment(enchantment);
+        stack.removeEnchantment(enchantment);
         return this;
     }
 
@@ -265,9 +265,9 @@ public class ItemBuilder {
      * @return The {@link ItemBuilder} instance.
      */
     public ItemBuilder flag(final ItemFlag... flag) {
-        final ItemMeta meta = this.stack.getItemMeta();
+        final ItemMeta meta = stack.getItemMeta();
         meta.addItemFlags(flag);
-        this.stack.setItemMeta(meta);
+        stack.setItemMeta(meta);
         return this;
     }
 
@@ -278,9 +278,9 @@ public class ItemBuilder {
      * @return The {@link ItemBuilder} instance.
      */
     public ItemBuilder deflag(final ItemFlag... flag) {
-        final ItemMeta meta = this.stack.getItemMeta();
+        final ItemMeta meta = stack.getItemMeta();
         meta.removeItemFlags(flag);
-        this.stack.setItemMeta(meta);
+        stack.setItemMeta(meta);
         return this;
     }
 
@@ -295,12 +295,12 @@ public class ItemBuilder {
      * @return The {@link ItemBuilder} instance.
      */
     public ItemBuilder skullOwner(final String name) {
-        if (!(this.stack.getItemMeta() instanceof SkullMeta)) return this;
+        if (!(stack.getItemMeta() instanceof SkullMeta)) return this;
 
-        this.stack.setDurability((byte) 3);
-        final SkullMeta meta = (SkullMeta) this.stack.getItemMeta();
+        stack.setDurability((byte) 3);
+        final SkullMeta meta = (SkullMeta) stack.getItemMeta();
         meta.setOwner(name);
-        this.stack.setItemMeta(meta);
+        stack.setItemMeta(meta);
 
         return this;
     }
@@ -338,7 +338,7 @@ public class ItemBuilder {
      * @return See {@link #get()}.
      */
     public ItemStack build() {
-        return this.get();
+        return get();
     }
 
     /**
@@ -350,7 +350,7 @@ public class ItemBuilder {
      * @return The manipulated ItemStack.
      */
     public ItemStack get() {
-        return this.stack;
+        return stack;
     }
 
 }

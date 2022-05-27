@@ -14,15 +14,15 @@ public enum SGPaginationButtonType {
     }
 
     public static SGPaginationButtonType forSlot(final int slot) {
-        for (final SGPaginationButtonType buttonType : values()) {
+        for (final SGPaginationButtonType buttonType : SGPaginationButtonType.values()) {
             if (buttonType.slot == slot) return buttonType;
         }
 
-        return UNASSIGNED;
+        return SGPaginationButtonType.UNASSIGNED;
     }
 
     public int getSlot() {
-        return this.slot;
+        return slot;
     }
 
 }
