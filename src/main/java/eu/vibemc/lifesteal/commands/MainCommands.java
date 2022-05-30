@@ -9,6 +9,13 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+import java.io.File;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.HashMap;
+import java.util.Map;
+
 import static eu.vibemc.lifesteal.other.Items.Recipes.registerRecipes;
 import static eu.vibemc.lifesteal.other.Items.Recipes.unregisterRecipes;
 
@@ -24,7 +31,8 @@ public class MainCommands {
                     sender.sendMessage("§6§lhttps://www.spigotmc.org/resources/p-lifesteal.101967/");
                 })
                 .withSubcommand(MainCommands.getHelpCommand())
-                .withSubcommand(MainCommands.getReloadCommand());
+                .withSubcommand(MainCommands.getReloadCommand())
+                .withSubcommand(MainCommands.getDebugInfoCommand());
     }
 
     private static CommandAPICommand getHelpCommand() {
@@ -35,6 +43,30 @@ public class MainCommands {
                     sender.sendMessage("§6§lhttps://ls.przemus.xyz/");
                     sender.sendMessage("§aIf you §c§ldon't §r§afind an answer to your question there, ask for help on discord:");
                     sender.sendMessage("§6§lhttps://discord.gg/8sjwaQTHGC/");
+                });
+    }
+
+    public static CommandAPICommand getDebugInfoCommand() {
+        return new CommandAPICommand("debug")
+                .withPermission("lifesteal.debug")
+                .withShortDescription("Debug command.")
+                .executes((sender, args) -> {
+                    sender.sendMessage("§aDebug Info:");
+                    sender.sendMessage("§6§lLS Version: §e" + Main.getInstance().getDescription().getVersion());
+                    sender.sendMessage("§6§lCore: §e" + Bukkit.getServer().getVersion());
+                    sender.sendMessage("§6§lAPI Version: §e" + Bukkit.getBukkitVersion());
+//                    File config = new File(Main.getInstance().getDataFolder(), "config.yml");
+//                    // make bukkit async
+//                    Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
+//                        URL url = new URL("https://pastebin.com/api/api_post.php");
+//                        URLConnection con = url.openConnection();
+//                        HttpURLConnection http = (HttpURLConnection)con;
+//                        http.setRequestMethod("POST");
+//                        http.setDoInput(true);
+//                        Map<String,String> arguments = new HashMap<>();
+//                        arguments.put("lang", "Plaintext");
+//                        http.connect();
+//                    });
                 });
     }
 

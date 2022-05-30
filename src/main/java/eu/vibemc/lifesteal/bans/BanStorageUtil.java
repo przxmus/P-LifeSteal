@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import eu.vibemc.lifesteal.Main;
 import eu.vibemc.lifesteal.bans.models.Ban;
 import eu.vibemc.lifesteal.other.Config;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -24,14 +25,18 @@ public class BanStorageUtil {
         Ban ban = new Ban(player.getUniqueId());
         bans.add(ban);
         saveBans();
-        if (player.isOnline()) {
-            if (Config.getBoolean("banOn0Hearts")) {
-                player.kickPlayer(Config.getMessage("noMoreHeartsBan"));
-                if (Config.getBoolean("broadcastBanFrom0Hearts")) {
-                    player.getServer().broadcastMessage(Config.getMessage("bannedNoMoreHeartsBroadcast").replace("${player}", player.getName()));
+        // bukkit wait 2 seconds
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
+            if (player.isOnline()) {
+                if (Config.getBoolean("banOn0Hearts")) {
+                    player.kickPlayer(Config.getMessage("noMoreHeartsBan"));
+                    if (Config.getBoolean("broadcastBanFrom0Hearts")) {
+                        player.getServer().broadcastMessage(Config.getMessage("bannedNoMoreHeartsBroadcast").replace("${player}", player.getName()));
+                    }
                 }
             }
-        }
+        }, 10L);
+
         return ban;
     }
 
