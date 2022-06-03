@@ -9,13 +9,6 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-import java.io.File;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.HashMap;
-import java.util.Map;
-
 import static eu.vibemc.lifesteal.other.Items.Recipes.registerRecipes;
 import static eu.vibemc.lifesteal.other.Items.Recipes.unregisterRecipes;
 
@@ -30,9 +23,9 @@ public class MainCommands {
                     sender.sendMessage("§6§lhttps://github.com/dewPrzemuS/P-LifeSteal");
                     sender.sendMessage("§6§lhttps://www.spigotmc.org/resources/p-lifesteal.101967/");
                 })
-                .withSubcommand(MainCommands.getHelpCommand())
-                .withSubcommand(MainCommands.getReloadCommand())
-                .withSubcommand(MainCommands.getDebugInfoCommand());
+                .withSubcommand(getHelpCommand())
+                .withSubcommand(getReloadCommand())
+                .withSubcommand(getDebugInfoCommand());
     }
 
     private static CommandAPICommand getHelpCommand() {

@@ -20,7 +20,7 @@ public class BansCommands {
                         sender.sendMessage("§c" + Main.getInstance().getServer().getOfflinePlayer(ban.getPlayerUUID()).getName());
                     }
                 })
-                .withSubcommand(BansCommands.getRemoveBanCommand());
+                .withSubcommand(getRemoveBanCommand());
     }
 
     private static CommandAPICommand getRemoveBanCommand() {

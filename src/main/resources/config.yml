@@ -1,24 +1,6 @@
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#
-#
-#
-#
-#
-#
-#
-#
-#
 # A guide on how to configure the plugin can be found in the official documentation.
 # https://ls.przemus.xyz/
-#
-#
-#
-#
-#
-#
-#
-#
-#
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 heartItem:
@@ -45,6 +27,7 @@ killHeartLimit: 0
 removeHeartOnlyIfKilledByPlayer: false
 banOn0Hearts: true
 broadcastBanFrom0Hearts: true
+banTime: 0
 
 recipe:
   enabled: true
