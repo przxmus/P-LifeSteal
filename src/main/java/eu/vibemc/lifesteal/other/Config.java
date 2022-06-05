@@ -33,7 +33,7 @@ public class Config {
 
     public static String translateHexCodes(String textToTranslate) {
 
-        Matcher matcher = HEX_PATTERN.matcher(textToTranslate);
+        Matcher matcher = Config.HEX_PATTERN.matcher(textToTranslate);
         StringBuilder builder = new StringBuilder();
 
         while (matcher.find()) {

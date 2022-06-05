@@ -65,10 +65,10 @@ public class SGMenu implements InventoryHolder {
         this.rowsPerPage = rowsPerPage;
         this.tag = tag;
 
-        this.items = new HashMap<>();
-        this.stickiedSlots = new HashSet<>();
+        items = new HashMap<>();
+        stickiedSlots = new HashSet<>();
 
-        this.currentPage = 0;
+        currentPage = 0;
     }
 
     /// INVENTORY SETTINGS ///
@@ -90,7 +90,7 @@ public class SGMenu implements InventoryHolder {
      * @see SpiGUI#areDefaultInteractionsBlocked()
      */
     public Boolean areDefaultInteractionsBlocked() {
-        return blockDefaultInteractions;
+        return this.blockDefaultInteractions;
     }
 
     /**
@@ -111,7 +111,7 @@ public class SGMenu implements InventoryHolder {
      * @see SpiGUI#isAutomaticPaginationEnabled()
      */
     public Boolean isAutomaticPaginationEnabled() {
-        return enableAutomaticPagination;
+        return this.enableAutomaticPagination;
     }
 
     /**
@@ -121,7 +121,7 @@ public class SGMenu implements InventoryHolder {
      * @see SpiGUI#getDefaultPaginationButtonBuilder()
      */
     public SGPaginationButtonBuilder getPaginationButtonBuilder() {
-        return this.paginationButtonBuilder;
+        return paginationButtonBuilder;
     }
 
     /**
@@ -144,7 +144,7 @@ public class SGMenu implements InventoryHolder {
      * @return The plugin the inventory is associated with.
      */
     public JavaPlugin getOwner() {
-        return owner;
+        return this.owner;
     }
 
     /// INVENTORY SIZE ///
@@ -157,7 +157,7 @@ public class SGMenu implements InventoryHolder {
      * @return The number of rows per page.
      */
     public int getRowsPerPage() {
-        return rowsPerPage;
+        return this.rowsPerPage;
     }
 
     /**
@@ -183,7 +183,7 @@ public class SGMenu implements InventoryHolder {
      * @return The number of inventory slots per page.
      */
     public int getPageSize() {
-        return rowsPerPage * 9;
+        return this.rowsPerPage * 9;
     }
 
     /// INVENTORY TAG ///
@@ -199,7 +199,7 @@ public class SGMenu implements InventoryHolder {
      * @return The GUI's tag.
      */
     public String getTag() {
-        return tag;
+        return this.tag;
     }
 
     /**
@@ -234,7 +234,7 @@ public class SGMenu implements InventoryHolder {
      * @return The inventory's display name.
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -260,13 +260,13 @@ public class SGMenu implements InventoryHolder {
     public void addButton(final SGButton button) {
         // If slot 0 is empty but it's the 'highest filled slot', then set slot 0 to contain button.
         // (This is an edge case for when the whole inventory is empty).
-        if (getHighestFilledSlot() == 0 && getButton(0) == null) {
-            setButton(0, button);
+        if (this.getHighestFilledSlot() == 0 && this.getButton(0) == null) {
+            this.setButton(0, button);
             return;
         }
 
         // Otherwise, add one to the highest filled slot, then use that slot for the new button.
-        setButton(getHighestFilledSlot() + 1, button);
+        this.setButton(this.getHighestFilledSlot() + 1, button);
     }
 
     /**
@@ -275,7 +275,7 @@ public class SGMenu implements InventoryHolder {
      * @param buttons The buttons to add.
      */
     public void addButtons(final SGButton... buttons) {
-        for (final SGButton button : buttons) addButton(button);
+        for (final SGButton button : buttons) this.addButton(button);
     }
 
     /**
@@ -291,7 +291,7 @@ public class SGMenu implements InventoryHolder {
      * @see #setButton(int, int, SGButton)
      */
     public void setButton(final int slot, final SGButton button) {
-        items.put(slot, button);
+        this.items.put(slot, button);
     }
 
     /**
@@ -311,10 +311,10 @@ public class SGMenu implements InventoryHolder {
      * @see #setButton(int, SGButton)
      */
     public void setButton(final int page, final int slot, final SGButton button) {
-        if (slot < 0 || slot > getPageSize())
+        if (slot < 0 || slot > this.getPageSize())
             return;
 
-        setButton((page * getPageSize()) + slot, button);
+        this.setButton((page * this.getPageSize()) + slot, button);
     }
 
     /**
@@ -323,7 +323,7 @@ public class SGMenu implements InventoryHolder {
      * @param slot The slot containing the button you wish to remove.
      */
     public void removeButton(final int slot) {
-        items.remove(slot);
+        this.items.remove(slot);
     }
 
     /**
@@ -336,10 +336,10 @@ public class SGMenu implements InventoryHolder {
      * @param slot The slot, of that page, containing the button you wish to remove.
      */
     public void removeButton(final int page, final int slot) {
-        if (slot < 0 || slot > getPageSize())
+        if (slot < 0 || slot > this.getPageSize())
             return;
 
-        removeButton((page * getPageSize()) + slot);
+        this.removeButton((page * this.getPageSize()) + slot);
     }
 
     /**
@@ -352,10 +352,10 @@ public class SGMenu implements InventoryHolder {
      * @return The {@link SGButton} that was in that slot or null if the slot was invalid or if there was no button that slot.
      */
     public SGButton getButton(final int slot) {
-        if (slot < 0 || slot > getHighestFilledSlot())
+        if (slot < 0 || slot > this.getHighestFilledSlot())
             return null;
 
-        return items.get(slot);
+        return this.items.get(slot);
     }
 
     /**
@@ -367,10 +367,10 @@ public class SGMenu implements InventoryHolder {
      * @return The {@link SGButton} that was in that slot or null if the slot was invalid or if there was no button that slot.
      */
     public SGButton getButton(final int page, final int slot) {
-        if (slot < 0 || slot > getPageSize())
+        if (slot < 0 || slot > this.getPageSize())
             return null;
 
-        return getButton((page * getPageSize()) + slot);
+        return this.getButton((page * this.getPageSize()) + slot);
     }
 
     /// PAGINATION ///
@@ -383,7 +383,7 @@ public class SGMenu implements InventoryHolder {
      * @return The current page of the inventory.
      */
     public int getCurrentPage() {
-        return currentPage;
+        return this.currentPage;
     }
 
     /**
@@ -393,8 +393,8 @@ public class SGMenu implements InventoryHolder {
      * @param page The new current page of the inventory.
      */
     public void setCurrentPage(final int page) {
-        this.currentPage = page;
-        if (this.onPageChange != null) this.onPageChange.accept(this);
+        currentPage = page;
+        if (onPageChange != null) onPageChange.accept(this);
     }
 
     /**
@@ -403,7 +403,7 @@ public class SGMenu implements InventoryHolder {
      * @return The highest page number that can be viewed.
      */
     public int getMaxPage() {
-        return (int) Math.ceil(((double) getHighestFilledSlot() + 1) / ((double) getPageSize()));
+        return (int) Math.ceil(((double) this.getHighestFilledSlot() + 1) / ((double) this.getPageSize()));
     }
 
     /**
@@ -416,8 +416,8 @@ public class SGMenu implements InventoryHolder {
     public int getHighestFilledSlot() {
         int slot = 0;
 
-        for (final int nextSlot : items.keySet()) {
-            if (items.get(nextSlot) != null && nextSlot > slot)
+        for (final int nextSlot : this.items.keySet()) {
+            if (this.items.get(nextSlot) != null && nextSlot > slot)
                 slot = nextSlot;
         }
 
@@ -433,10 +433,10 @@ public class SGMenu implements InventoryHolder {
      * @return Whether or not the page could be changed (false means the max page is currently open).
      */
     public boolean nextPage(final HumanEntity viewer) {
-        if (currentPage < getMaxPage() - 1) {
-            currentPage++;
-            refreshInventory(viewer);
-            if (this.onPageChange != null) this.onPageChange.accept(this);
+        if (this.currentPage < this.getMaxPage() - 1) {
+            this.currentPage++;
+            this.refreshInventory(viewer);
+            if (onPageChange != null) onPageChange.accept(this);
             return true;
         } else {
             return false;
@@ -452,10 +452,10 @@ public class SGMenu implements InventoryHolder {
      * @return Whether or not the page could be changed (false means the first page is currently open).
      */
     public boolean previousPage(final HumanEntity viewer) {
-        if (currentPage > 0) {
-            currentPage--;
-            refreshInventory(viewer);
-            if (this.onPageChange != null) this.onPageChange.accept(this);
+        if (this.currentPage > 0) {
+            this.currentPage--;
+            this.refreshInventory(viewer);
+            if (onPageChange != null) onPageChange.accept(this);
             return true;
         } else {
             return false;
@@ -479,10 +479,10 @@ public class SGMenu implements InventoryHolder {
      * @param slot The slot to mark as 'sticky'.
      */
     public void stickSlot(final int slot) {
-        if (slot < 0 || slot >= getPageSize())
+        if (slot < 0 || slot >= this.getPageSize())
             return;
 
-        this.stickiedSlots.add(slot);
+        stickiedSlots.add(slot);
     }
 
     /**
@@ -493,7 +493,7 @@ public class SGMenu implements InventoryHolder {
      * @see #stickSlot(int)
      */
     public void unstickSlot(final int slot) {
-        this.stickiedSlots.remove(Integer.valueOf(slot));
+        stickiedSlots.remove(Integer.valueOf(slot));
     }
 
     /**
@@ -503,7 +503,7 @@ public class SGMenu implements InventoryHolder {
      * @see #stickSlot(int)
      */
     public void clearStickiedSlots() {
-        this.stickiedSlots.clear();
+        stickiedSlots.clear();
     }
 
     /**
@@ -517,10 +517,10 @@ public class SGMenu implements InventoryHolder {
      * @see #stickSlot(int)
      */
     public boolean isStickiedSlot(final int slot) {
-        if (slot < 0 || slot >= getPageSize())
+        if (slot < 0 || slot >= this.getPageSize())
             return false;
 
-        return this.stickiedSlots.contains(slot);
+        return stickiedSlots.contains(slot);
     }
 
     /**
@@ -530,8 +530,8 @@ public class SGMenu implements InventoryHolder {
      * @see #stickSlot(int)
      */
     public void clearAllButStickiedSlots() {
-        this.currentPage = 0;
-        items.entrySet().removeIf(item -> !isStickiedSlot(item.getKey()));
+        currentPage = 0;
+        this.items.entrySet().removeIf(item -> !this.isStickiedSlot(item.getKey()));
     }
 
     /// EVENTS ///
@@ -541,7 +541,7 @@ public class SGMenu implements InventoryHolder {
      * @see #setOnClose(Consumer)
      */
     public Consumer<SGMenu> getOnClose() {
-        return this.onClose;
+        return onClose;
     }
 
     /**
@@ -560,7 +560,7 @@ public class SGMenu implements InventoryHolder {
      * @see #setOnPageChange(Consumer)
      */
     public Consumer<SGMenu> getOnPageChange() {
-        return this.onPageChange;
+        return onPageChange;
     }
 
     /**
@@ -582,21 +582,21 @@ public class SGMenu implements InventoryHolder {
         ) return;
 
         // If the new size is different, we'll need to open a new inventory.
-        if (viewer.getOpenInventory().getTopInventory().getSize() != getPageSize() + (getMaxPage() > 0 ? 9 : 0)) {
-            viewer.openInventory(getInventory());
+        if (viewer.getOpenInventory().getTopInventory().getSize() != this.getPageSize() + (this.getMaxPage() > 0 ? 9 : 0)) {
+            viewer.openInventory(this.getInventory());
             return;
         }
 
         // If the name has changed, we'll need to open a new inventory.
-        final String newName = name.replace("{currentPage}", String.valueOf(currentPage + 1))
-                .replace("{maxPage}", String.valueOf(getMaxPage()));
+        final String newName = this.name.replace("{currentPage}", String.valueOf(this.currentPage + 1))
+                .replace("{maxPage}", String.valueOf(this.getMaxPage()));
         if (!viewer.getOpenInventory().getTitle().equals(newName)) {
-            viewer.openInventory(getInventory());
+            viewer.openInventory(this.getInventory());
             return;
         }
 
         // Otherwise, we can refresh the contents without re-opening the inventory.
-        viewer.getOpenInventory().getTopInventory().setContents(getInventory().getContents());
+        viewer.getOpenInventory().getTopInventory().setContents(this.getInventory().getContents());
     }
 
     /**
@@ -607,48 +607,48 @@ public class SGMenu implements InventoryHolder {
      */
     @Override
     public Inventory getInventory() {
-        boolean isAutomaticPaginationEnabled = spiGUI.isAutomaticPaginationEnabled();
-        if (isAutomaticPaginationEnabled() != null) {
-            isAutomaticPaginationEnabled = isAutomaticPaginationEnabled();
+        boolean isAutomaticPaginationEnabled = this.spiGUI.isAutomaticPaginationEnabled();
+        if (this.isAutomaticPaginationEnabled() != null) {
+            isAutomaticPaginationEnabled = this.isAutomaticPaginationEnabled();
         }
 
-        final boolean needsPagination = getMaxPage() > 0 && isAutomaticPaginationEnabled;
+        final boolean needsPagination = this.getMaxPage() > 0 && isAutomaticPaginationEnabled;
 
         final Inventory inventory = Bukkit.createInventory(this, (
                         (needsPagination)
                                 // Pagination enabled: add the bottom toolbar row.
-                                ? getPageSize() + 9
+                                ? this.getPageSize() + 9
                                 // Pagination not required or disabled.
-                                : getPageSize()
+                                : this.getPageSize()
                 ),
-                name.replace("{currentPage}", String.valueOf(currentPage + 1))
-                        .replace("{maxPage}", String.valueOf(getMaxPage()))
+                this.name.replace("{currentPage}", String.valueOf(this.currentPage + 1))
+                        .replace("{maxPage}", String.valueOf(this.getMaxPage()))
         );
 
         // Add the main inventory items.
-        for (int key = currentPage * getPageSize(); key < (currentPage + 1) * getPageSize(); key++) {
+        for (int key = this.currentPage * this.getPageSize(); key < (this.currentPage + 1) * this.getPageSize(); key++) {
             // If we've already reached the maximum assigned slot, stop assigning
             // slots.
-            if (key > getHighestFilledSlot()) break;
+            if (key > this.getHighestFilledSlot()) break;
 
-            if (items.containsKey(key)) {
-                inventory.setItem(key - (currentPage * getPageSize()), items.get(key).getIcon());
+            if (this.items.containsKey(key)) {
+                inventory.setItem(key - (this.currentPage * this.getPageSize()), this.items.get(key).getIcon());
             }
         }
 
         // Update the stickied slots.
-        for (final int stickiedSlot : stickiedSlots) {
-            inventory.setItem(stickiedSlot, items.get(stickiedSlot).getIcon());
+        for (final int stickiedSlot : this.stickiedSlots) {
+            inventory.setItem(stickiedSlot, this.items.get(stickiedSlot).getIcon());
         }
 
         // Render the pagination items.
         if (needsPagination) {
-            SGPaginationButtonBuilder paginationButtonBuilder = spiGUI.getDefaultPaginationButtonBuilder();
-            if (getPaginationButtonBuilder() != null) {
-                paginationButtonBuilder = getPaginationButtonBuilder();
+            SGPaginationButtonBuilder paginationButtonBuilder = this.spiGUI.getDefaultPaginationButtonBuilder();
+            if (this.getPaginationButtonBuilder() != null) {
+                paginationButtonBuilder = this.getPaginationButtonBuilder();
             }
 
-            final int pageSize = getPageSize();
+            final int pageSize = this.getPageSize();
             for (int i = pageSize; i < pageSize + 9; i++) {
                 final int offset = i - pageSize;
 

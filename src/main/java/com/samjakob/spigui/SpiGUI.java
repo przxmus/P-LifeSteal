@@ -170,7 +170,7 @@ public class SpiGUI {
      * @return The created inventory.
      */
     public SGMenu create(final String name, final int rows) {
-        return create(name, rows, null);
+        return this.create(name, rows, null);
     }
 
     /**
@@ -213,7 +213,7 @@ public class SpiGUI {
      * @return The created inventory.
      */
     public SGMenu create(final String name, final int rows, final String tag) {
-        return new SGMenu(plugin, this, name, rows, tag);
+        return new SGMenu(this.plugin, this, name, rows, tag);
     }
 
     /**
@@ -230,7 +230,7 @@ public class SpiGUI {
      * @return Whether or not default inventory interactions should be cancelled.
      */
     public boolean areDefaultInteractionsBlocked() {
-        return blockDefaultInteractions;
+        return this.blockDefaultInteractions;
     }
 
     /**
@@ -247,7 +247,7 @@ public class SpiGUI {
      * @return Whether or not automatic pagination is enabled.
      */
     public boolean isAutomaticPaginationEnabled() {
-        return enableAutomaticPagination;
+        return this.enableAutomaticPagination;
     }
 
     /**
@@ -255,7 +255,7 @@ public class SpiGUI {
      * @see SpiGUI#defaultPaginationButtonBuilder
      */
     public SGPaginationButtonBuilder getDefaultPaginationButtonBuilder() {
-        return defaultPaginationButtonBuilder;
+        return this.defaultPaginationButtonBuilder;
     }
 
     /**
@@ -283,7 +283,7 @@ public class SpiGUI {
         final List<SGOpenMenu> foundInventories = new ArrayList<>();
 
         // Loop through every online player...
-        for (final Player player : plugin.getServer().getOnlinePlayers()) {
+        for (final Player player : this.plugin.getServer().getOnlinePlayers()) {
             // ...if that player has an open inventory with a top inventory...
             if (player.getOpenInventory().getTopInventory() != null) {
                 // ...get that top inventory.

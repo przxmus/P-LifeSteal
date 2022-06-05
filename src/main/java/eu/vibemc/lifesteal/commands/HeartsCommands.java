@@ -10,10 +10,10 @@ public class HeartsCommands {
     public static CommandAPICommand getAllHeartsCommands() {
         return new CommandAPICommand("hearts")
                 .withShortDescription("Command to manage hearts.")
-                .withSubcommand(getCheckHeartsCommand())
-                .withSubcommand(getSetHeartsCommand())
-                .withSubcommand(getAddHeartsCommand())
-                .withSubcommand(getRemoveHeartsCommand());
+                .withSubcommand(HeartsCommands.getCheckHeartsCommand())
+                .withSubcommand(HeartsCommands.getSetHeartsCommand())
+                .withSubcommand(HeartsCommands.getAddHeartsCommand())
+                .withSubcommand(HeartsCommands.getRemoveHeartsCommand());
     }
 
     private static CommandAPICommand getAddHeartsCommand() {

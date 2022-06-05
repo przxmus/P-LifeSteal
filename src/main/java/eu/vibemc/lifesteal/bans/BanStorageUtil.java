@@ -19,7 +19,7 @@ public class BanStorageUtil {
     private static ArrayList<Ban> bans = new ArrayList<>();
 
     public static Ban createBan(Player player) throws IOException {
-        if (BanStorageUtil.getBan(player.getUniqueId()) != null) {
+        if (getBan(player.getUniqueId()) != null) {
             return null;
         }
         Ban createdBan;
@@ -27,16 +27,16 @@ public class BanStorageUtil {
             int banTime = Config.getInt("banTime") * 60;
             long unixTime = System.currentTimeMillis() / 1000L + banTime;
             Ban ban = new Ban(player.getUniqueId(), unixTime);
-            BanStorageUtil.bans.add(ban);
-            BanStorageUtil.saveBans();
+            bans.add(ban);
+            saveBans();
             createdBan = ban;
         } else {
             Ban ban = new Ban(player.getUniqueId(), 5283862620L);
-            BanStorageUtil.bans.add(ban);
-            BanStorageUtil.saveBans();
+            bans.add(ban);
+            saveBans();
             createdBan = ban;
         }
-        // bukkit wait 2 seconds
+        player.setMaxHealth(Config.getInt("reviveHeartAmount"));
         Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
             if (player.isOnline()) {
                 if (Config.getBoolean("banOn0Hearts")) {
@@ -57,14 +57,14 @@ public class BanStorageUtil {
     }
 
     public static Ban getBan(UUID uuid) throws IOException {
-        for (Ban ban : BanStorageUtil.bans) {
+        for (Ban ban : bans) {
             if (ban.getPlayerUUID().equals(uuid)) {
                 // check if ban is still valid
                 if (ban.getUnbanTime() > System.currentTimeMillis() / 1000L) {
                     return ban;
                 } else {
-                    BanStorageUtil.bans.remove(ban);
-                    BanStorageUtil.saveBans();
+                    bans.remove(ban);
+                    saveBans();
                     return null;
                 }
             }
@@ -73,11 +73,11 @@ public class BanStorageUtil {
     }
 
     public static boolean deleteBan(UUID uuid) throws IOException {
-        if (BanStorageUtil.getBan(uuid) == null) {
+        if (getBan(uuid) == null) {
             return false;
         }
-        BanStorageUtil.bans.remove(BanStorageUtil.getBan(uuid));
-        BanStorageUtil.saveBans();
+        bans.remove(getBan(uuid));
+        saveBans();
         return true;
     }
 
@@ -88,7 +88,7 @@ public class BanStorageUtil {
         file.createNewFile();
         Writer writer = null;
         writer = new FileWriter(file, false);
-        gson.toJson(BanStorageUtil.bans, writer);
+        gson.toJson(bans, writer);
         writer.flush();
         writer.close();
     }
@@ -99,11 +99,11 @@ public class BanStorageUtil {
         if (file.exists()) {
             Reader reader = new FileReader(file);
             Ban[] b = gson.fromJson(reader, Ban[].class);
-            BanStorageUtil.bans = new ArrayList<>(Arrays.asList(b));
+            bans = new ArrayList<>(Arrays.asList(b));
         }
     }
 
     public static List<Ban> findAllBans() {
-        return BanStorageUtil.bans;
+        return bans;
     }
 }

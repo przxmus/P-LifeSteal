@@ -30,7 +30,7 @@ public class LootPopulator extends BlockPopulator {
             if (!(entity instanceof StorageMinecart minecart)) {
                 continue;
             }
-            modifyInventory(minecart.getInventory(), chunk);
+            this.modifyInventory(minecart.getInventory(), chunk);
         }
 
         for (BlockState state : chunk.getTileEntities()) {
@@ -39,7 +39,7 @@ public class LootPopulator extends BlockPopulator {
                 continue;
             }
             Inventory inventory = chestState.getBlockInventory();
-            modifyInventory(inventory, chunk);
+            this.modifyInventory(inventory, chunk);
         }
     }
 
@@ -47,7 +47,7 @@ public class LootPopulator extends BlockPopulator {
                                 final Chunk chunk) {
 
         try {
-            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            Bukkit.getScheduler().runTaskLater(this.plugin, () -> {
                 if (chunk.isLoaded()) {
                     int random = (int) (Math.random() * 100);
                     Main.getInstance().getConfig().getConfigurationSection("loot.worlds").getKeys(false).forEach(worldName -> {

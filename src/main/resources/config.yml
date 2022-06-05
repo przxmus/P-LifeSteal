@@ -28,6 +28,7 @@ removeHeartOnlyIfKilledByPlayer: false
 banOn0Hearts: true
 broadcastBanFrom0Hearts: true
 banTime: 0
+reviveHeartAmount: 20
 
 recipe:
   enabled: true

@@ -12,7 +12,7 @@ public class Ban {
     }
 
     public UUID getPlayerUUID() {
-        return playerUUID;
+        return this.playerUUID;
     }
 
     public void setPlayerUUID(UUID playerUUID) {
@@ -21,10 +21,10 @@ public class Ban {
 
     public long getUnbanTime() {
         // check if unbanTime is set
-        if (unbanTime == 0) {
+        if (this.unbanTime == 0) {
             return 5283862620L;
         }
-        return unbanTime;
+        return this.unbanTime;
     }
 
     public void setUnbanTime(long unbanTime) {

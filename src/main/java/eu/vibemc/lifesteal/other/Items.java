@@ -123,7 +123,7 @@ public class Items {
                 return;
             }
             // get chance
-            int chance = getChance(item);
+            int chance = ExtraHeart.getChance(item);
             // generate random number between 0 and 100 and check if it is less than the chance
             int random = (int) (Math.random() * 100);
             if (random <= chance) {

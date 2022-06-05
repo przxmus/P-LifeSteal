@@ -23,9 +23,9 @@ public class MainCommands {
                     sender.sendMessage("§6§lhttps://github.com/dewPrzemuS/P-LifeSteal");
                     sender.sendMessage("§6§lhttps://www.spigotmc.org/resources/p-lifesteal.101967/");
                 })
-                .withSubcommand(getHelpCommand())
-                .withSubcommand(getReloadCommand())
-                .withSubcommand(getDebugInfoCommand());
+                .withSubcommand(MainCommands.getHelpCommand())
+                .withSubcommand(MainCommands.getReloadCommand())
+                .withSubcommand(MainCommands.getDebugInfoCommand());
     }
 
     private static CommandAPICommand getHelpCommand() {

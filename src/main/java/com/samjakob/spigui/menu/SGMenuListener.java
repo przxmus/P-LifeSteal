@@ -34,7 +34,7 @@ public class SGMenuListener implements Listener {
             // Check if the GUI is owner by the current plugin
             // (if not, it'll be deferred to the SGMenuListener registered
             // by that plugin that does own the GUI.)
-            if (!clickedGui.getOwner().equals(owner)) return;
+            if (!clickedGui.getOwner().equals(this.owner)) return;
 
             // If the default action is to cancel the event (block default interactions)
             // we'll do that now.
@@ -46,14 +46,14 @@ public class SGMenuListener implements Listener {
             } else {
                 // Note that this can be overridden by a call to #setCancelled(false) in
                 // the button's event handler.
-                if (spiGUI.areDefaultInteractionsBlocked())
+                if (this.spiGUI.areDefaultInteractionsBlocked())
                     event.setCancelled(true);
             }
 
             // If the slot is on the pagination row, get the appropriate pagination handler.
             if (event.getSlot() > clickedGui.getPageSize()) {
                 final int offset = event.getSlot() - clickedGui.getPageSize();
-                SGPaginationButtonBuilder paginationButtonBuilder = spiGUI.getDefaultPaginationButtonBuilder();
+                SGPaginationButtonBuilder paginationButtonBuilder = this.spiGUI.getDefaultPaginationButtonBuilder();
 
                 if (clickedGui.getPaginationButtonBuilder() != null) {
                     paginationButtonBuilder = clickedGui.getPaginationButtonBuilder();
@@ -95,7 +95,7 @@ public class SGMenuListener implements Listener {
             // Check if the GUI is owner by the current plugin
             // (if not, it'll be deferred to the SGMenuListener registered
             // by that plugin that does own the GUI.)
-            if (!clickedGui.getOwner().equals(owner)) return;
+            if (!clickedGui.getOwner().equals(this.owner)) return;
 
             // If all the above is true and the inventory's onClose is not null,
             // call it.
