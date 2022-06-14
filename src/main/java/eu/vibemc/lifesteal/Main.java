@@ -5,14 +5,13 @@ import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIConfig;
 import eu.vibemc.lifesteal.bans.BanStorageUtil;
 import eu.vibemc.lifesteal.events.*;
-import eu.vibemc.lifesteal.other.Config;
-import eu.vibemc.lifesteal.other.LootPopulator;
-import eu.vibemc.lifesteal.other.Metrics;
-import eu.vibemc.lifesteal.other.UpdateChecker;
+import eu.vibemc.lifesteal.other.*;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.configuration.Configuration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.io.IOException;
 
 import static eu.vibemc.lifesteal.commands.CommandsManager.loadCommands;
@@ -46,6 +45,7 @@ public final class Main extends JavaPlugin {
         spiGUI = new SpiGUI(this);
         CommandAPI.onEnable(this);
         Metrics metrics = new Metrics(this, 15176);
+
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
