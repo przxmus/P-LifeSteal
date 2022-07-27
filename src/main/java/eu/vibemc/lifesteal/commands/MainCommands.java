@@ -2,12 +2,16 @@ package eu.vibemc.lifesteal.commands;
 
 import dev.jorel.commandapi.CommandAPICommand;
 import eu.vibemc.lifesteal.Main;
+import eu.vibemc.lifesteal.bans.BanStorageUtil;
 import eu.vibemc.lifesteal.other.Config;
+import eu.vibemc.lifesteal.other.Items;
 import eu.vibemc.lifesteal.other.LootPopulator;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+
+import java.io.IOException;
 
 import static eu.vibemc.lifesteal.other.Items.Recipes.registerRecipes;
 import static eu.vibemc.lifesteal.other.Items.Recipes.unregisterRecipes;
@@ -23,6 +27,7 @@ public class MainCommands {
                     sender.sendMessage("§6§lhttps://github.com/dewPrzemuS/P-LifeSteal");
                     sender.sendMessage("§6§lhttps://www.spigotmc.org/resources/p-lifesteal.101967/");
                 })
+                .withSubcommand(MainCommands.getWithdrawCommand())
                 .withSubcommand(MainCommands.getHelpCommand())
                 .withSubcommand(MainCommands.getReloadCommand())
                 .withSubcommand(MainCommands.getDebugInfoCommand());
@@ -60,6 +65,32 @@ public class MainCommands {
 //                        arguments.put("lang", "Plaintext");
 //                        http.connect();
 //                    });
+                });
+    }
+
+    private static CommandAPICommand getWithdrawCommand() {
+        return new CommandAPICommand("withdraw")
+                .withShortDescription("Withdraws heart.")
+                .executes((sender, args) -> {
+                    if (sender instanceof Player) {
+                        Player player = (Player) sender;
+                        if (player.getMaxHealth() - 2 <= 0) {
+                            try {
+                                player.getInventory().addItem(Items.ExtraHeart.getExtraHeart(100));
+                                player.updateInventory();
+                                BanStorageUtil.createBan(player);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        } else {
+                            player.setMaxHealth(player.getMaxHealth() - 2);
+                            player.getInventory().addItem(Items.ExtraHeart.getExtraHeart(100));
+                            player.updateInventory();
+                        }
+
+                    } else {
+                        sender.sendMessage(Config.getMessage("urNotPlayer"));
+                    }
                 });
     }
 

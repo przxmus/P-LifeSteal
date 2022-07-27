@@ -115,3 +115,4 @@ messages:
   currentPageLore: "&7You are currently viewing page ${page}."
   nextPage: "&a&lNext Page →"
   nextPageLore: "&aClick to move forward to page ${page}."
+  urNotPlayer: "§cYou have to be a player to use this."
