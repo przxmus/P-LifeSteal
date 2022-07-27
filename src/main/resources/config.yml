@@ -115,5 +115,6 @@ messages:
   currentPageLore: "&7You are currently viewing page ${page}."
   nextPage: "&a&lNext Page →"
   nextPageLore: "&aClick to move forward to page ${page}."
-  urNotPlayer: "§cYou have to be a player to use this."
-  featureDisabled: "§cThis feature is disabled."
+  urNotPlayer: "&c&lYou have to be a player to use this."
+  featureDisabled: "&c&lThis feature is disabled."
+  heartWithdrawn: "&a&lYou've withdrawn an heart."

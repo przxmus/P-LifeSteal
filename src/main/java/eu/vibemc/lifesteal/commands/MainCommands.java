@@ -8,6 +8,7 @@ import eu.vibemc.lifesteal.other.Items;
 import eu.vibemc.lifesteal.other.LootPopulator;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
@@ -72,16 +73,19 @@ public class MainCommands {
         return new CommandAPICommand("withdraw")
                 .withShortDescription("Withdraws heart.")
                 .executes((sender, args) -> {
-                    if (!Config.getBoolean("heartItem.withdraw-enabled")) {
-                        sender.sendMessage(Config.getMessage("featureDisabled"));
-                        return;
-                    }
                     if (sender instanceof Player) {
                         Player player = (Player) sender;
+                        if (!Config.getBoolean("heartItem.withdraw-enabled")) {
+                            player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
+                            sender.sendMessage(Config.getMessage("featureDisabled"));
+                            return;
+                        }
                         if (player.getMaxHealth() - 2 <= 0) {
                             try {
                                 player.getInventory().addItem(Items.ExtraHeart.getExtraHeart(100));
                                 player.updateInventory();
+                                player.sendMessage(Config.getMessage("heartWithdrawn"));
+                                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
                                 BanStorageUtil.createBan(player);
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
@@ -90,6 +94,8 @@ public class MainCommands {
                             player.setMaxHealth(player.getMaxHealth() - 2);
                             player.getInventory().addItem(Items.ExtraHeart.getExtraHeart(100));
                             player.updateInventory();
+                            player.sendMessage(Config.getMessage("heartWithdrawn"));
+                            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
                         }
 
                     } else {
