@@ -44,7 +44,7 @@ public class Items {
 
         public static void useReviveBook(Player player, ItemStack item) throws IOException {
             if (!Config.getBoolean("reviveBook.enabled")) {
-                player.sendMessage(Config.getMessage("itemDisabled"));
+                player.sendMessage(Config.getMessage("featureDisabled"));
                 player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
                 return;
             }
@@ -118,7 +118,7 @@ public class Items {
 
         public static void useExtraHeart(Player player, ItemStack item) throws IOException {
             if (!Config.getBoolean("heartItem.enabled")) {
-                player.sendMessage(Config.getMessage("itemDisabled"));
+                player.sendMessage(Config.getMessage("featureDisabled"));
                 player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
                 return;
             }

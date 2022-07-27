@@ -72,6 +72,10 @@ public class MainCommands {
         return new CommandAPICommand("withdraw")
                 .withShortDescription("Withdraws heart.")
                 .executes((sender, args) -> {
+                    if (!Config.getBoolean("heartItem.withdraw-enabled")) {
+                        sender.sendMessage(Config.getMessage("featureDisabled"));
+                        return;
+                    }
                     if (sender instanceof Player) {
                         Player player = (Player) sender;
                         if (player.getMaxHealth() - 2 <= 0) {

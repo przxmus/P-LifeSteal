@@ -12,6 +12,7 @@ heartItem:
     - "&7&oYou have ${chance}% to get an additional heart added."
   loseChance: 50
   addLimit: 0
+  withdraw-enabled: true
 
 reviveBook:
   enabled: true
@@ -90,7 +91,6 @@ messages:
   heartLost: "&4&lYou've lost an heart."
   noMoreHeartsBan: "&c&lYou've lost all your lives."
   bannedNoMoreHeartsBroadcast: "&c&l${player} &4&lhas lost all his lives."
-  itemDisabled: "&c&lThis item is disabled."
   configReloaded: "&aConfig reloaded."
   recipesReloaded: "&aRecipes reloaded."
   lootReloaded: "&aLoot settings reloaded."
@@ -116,3 +116,4 @@ messages:
   nextPage: "&a&lNext Page →"
   nextPageLore: "&aClick to move forward to page ${page}."
   urNotPlayer: "§cYou have to be a player to use this."
+  featureDisabled: "§cThis feature is disabled."
