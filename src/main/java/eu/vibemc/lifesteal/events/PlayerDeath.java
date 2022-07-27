@@ -28,7 +28,7 @@ public class PlayerDeath implements Listener {
                     // send thunder sound to killed player
                     player.playSound(player.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 100, 2);
                 }
-                if (Config.getInt("killHeartLimit") == 0 || killer.getMaxHealth() + 2 <= Config.getInt("killHeartLimit")) {
+                if (Config.getInt("killHeartLimit") == 0 || player.getMaxHealth() + 2 <= Config.getInt("killHeartLimit")) {
                     // add 2 to max health of killer
                     killer.setMaxHealth(killer.getMaxHealth() + 2);
                     // send actionbar to killer
@@ -36,7 +36,7 @@ public class PlayerDeath implements Listener {
                     // send level up sound to killer
                     killer.playSound(killer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
                 } else {
-                    killer.playSound(killer.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
+                    player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
                     killer.sendMessage(Config.getMessage("maxHearts").replace("${max}", String.valueOf(Config.getInt("killHeartLimit") / 2)));
                 }
             } else {
@@ -54,7 +54,7 @@ public class PlayerDeath implements Listener {
                 player.playSound(player.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 100, 2);
             }
             if (killer != null) {
-                if (Config.getInt("killHeartLimit") == 0 || killer.getMaxHealth() + 2 <= Config.getInt("killHeartLimit")) {
+                if (Config.getInt("killHeartLimit") == 0 || player.getMaxHealth() + 2 <= Config.getInt("killHeartLimit")) {
                     // add 2 to max health of killer
                     killer.setMaxHealth(killer.getMaxHealth() + 2);
                     // send actionbar to killer
@@ -62,7 +62,7 @@ public class PlayerDeath implements Listener {
                     // send level up sound to killer
                     killer.playSound(killer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
                 } else {
-                    killer.playSound(killer.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
+                    player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
                     killer.sendMessage(Config.getMessage("maxHearts").replace("${max}", String.valueOf(Config.getInt("killHeartLimit") / 2)));
                 }
             }
