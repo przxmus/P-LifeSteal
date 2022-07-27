@@ -2,7 +2,12 @@ package eu.vibemc.lifesteal.other;
 
 import eu.vibemc.lifesteal.Main;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.YamlConfiguration;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -42,5 +47,24 @@ public class Config {
 
         return net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', matcher.appendTail(builder).toString());
 
+    }
+
+    public static void Update() {
+        File file = new File(Main.getInstance().getDataFolder() + "/config.yml");
+        YamlConfiguration externalFile = YamlConfiguration.loadConfiguration(file);
+
+        InputStreamReader defConfigStream = new InputStreamReader(Main.getInstance().getResource("config.yml"), StandardCharsets.UTF_8);
+        YamlConfiguration internalFile = YamlConfiguration.loadConfiguration(defConfigStream);
+
+        for (String string : internalFile.getKeys(true)) {
+            if (!externalFile.contains(string)) {
+                externalFile.set(string, internalFile.get(string));
+            }
+        }
+        try {
+            externalFile.save(file);
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
     }
 }

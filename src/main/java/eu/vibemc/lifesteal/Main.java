@@ -8,10 +8,8 @@ import eu.vibemc.lifesteal.events.*;
 import eu.vibemc.lifesteal.other.*;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.configuration.Configuration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
 import java.io.IOException;
 
 import static eu.vibemc.lifesteal.commands.CommandsManager.loadCommands;
@@ -48,6 +46,7 @@ public final class Main extends JavaPlugin {
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+        Config.Update();
 
         this.getServer().getPluginManager().registerEvents(new PlayerDeath(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
