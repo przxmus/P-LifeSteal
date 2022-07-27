@@ -133,7 +133,7 @@ public class Items {
                     player.sendMessage(Config.getMessage("heartReceived"));
                     player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
                 } else {
-                    player.sendMessage(Config.getMessage("maxHeartsFromExtraHeart").replace("${max}", String.valueOf(Config.getInt("heartItem.addLimit"))));
+                    player.sendMessage(Config.getMessage("maxHeartsFromExtraHeart").replace("${max}", String.valueOf(Config.getInt("heartItem.addLimit") / 2)));
                 }
             } else {
                 item.setAmount(item.getAmount() - 1);

@@ -25,8 +25,8 @@ public class HeartsCommands {
                     Player player = (Player) args[0];
                     int amount = (int) args[1];
                     player.setMaxHealth(player.getMaxHealth() + amount);
-                    player.sendMessage(Config.getMessage("heartAdded").replace("${amount}", String.valueOf(amount)));
-                    sender.sendMessage(Config.getMessage("heartAddedAdmin").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
+                    player.sendMessage(Config.getMessage("heartAdded").replace("${amount}", String.valueOf(amount / 2)));
+                    sender.sendMessage(Config.getMessage("heartAddedAdmin").replace("${amount}", String.valueOf(amount / 2)).replace("${player}", player.getName()));
                 });
     }
 
@@ -39,8 +39,8 @@ public class HeartsCommands {
                     Player player = (Player) args[0];
                     int amount = (int) args[1];
                     player.setMaxHealth(amount);
-                    player.sendMessage(Config.getMessage("heartSetted").replace("${amount}", String.valueOf(amount)));
-                    sender.sendMessage(Config.getMessage("heartSettedAdmin").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
+                    player.sendMessage(Config.getMessage("heartSetted").replace("${amount}", String.valueOf(amount / 2)));
+                    sender.sendMessage(Config.getMessage("heartSettedAdmin").replace("${amount}", String.valueOf(amount / 2)).replace("${player}", player.getName()));
 
                 });
     }
@@ -54,8 +54,8 @@ public class HeartsCommands {
                     Player player = (Player) args[0];
                     int amount = (int) args[1];
                     player.setMaxHealth(player.getMaxHealth() - amount);
-                    player.sendMessage(Config.getMessage("heartRemoved").replace("${amount}", String.valueOf(amount)));
-                    sender.sendMessage(Config.getMessage("heartRemovedAdmin").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
+                    player.sendMessage(Config.getMessage("heartRemoved").replace("${amount}", String.valueOf(amount / 2)));
+                    sender.sendMessage(Config.getMessage("heartRemovedAdmin").replace("${amount}", String.valueOf(amount / 2)).replace("${player}", player.getName()));
 
                 });
     }
@@ -68,7 +68,7 @@ public class HeartsCommands {
                 .executes((sender, args) -> {
                     Player player = (Player) args[0];
                     int amount = (int) player.getMaxHealth();
-                    sender.sendMessage(Config.getMessage("heartCheck").replace("${amount}", String.valueOf(amount)).replace("${player}", player.getName()));
+                    sender.sendMessage(Config.getMessage("heartCheck").replace("${amount}", String.valueOf(amount / 2)).replace("${player}", player.getName()));
                 });
     }
 }

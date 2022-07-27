@@ -36,7 +36,7 @@ public class PlayerDeath implements Listener {
                     // send level up sound to killer
                     killer.playSound(killer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
                 } else {
-                    killer.sendMessage(Config.getMessage("maxHearts").replace("${max}", String.valueOf(Config.getInt("killHeartLimit"))));
+                    killer.sendMessage(Config.getMessage("maxHearts").replace("${max}", String.valueOf(Config.getInt("killHeartLimit") / 2)));
                 }
             } else {
                 return;
@@ -61,7 +61,7 @@ public class PlayerDeath implements Listener {
                     // send level up sound to killer
                     killer.playSound(killer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
                 } else {
-                    killer.sendMessage(Config.getMessage("maxHearts").replace("${max}", String.valueOf(Config.getInt("killHeartLimit"))));
+                    killer.sendMessage(Config.getMessage("maxHearts").replace("${max}", String.valueOf(Config.getInt("killHeartLimit") / 2)));
                 }
             }
         }
