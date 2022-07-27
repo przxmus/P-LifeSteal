@@ -6,7 +6,7 @@
 
     <groupId>eu.vibemc</groupId>
     <artifactId>LifeSteal</artifactId>
-    <version>1.4</version>
+    <version>1.4.1</version>
     <packaging>jar</packaging>
 
     <name>P-LifeSteal</name>
@@ -104,7 +104,7 @@
         <dependency>
             <groupId>dev.jorel</groupId>
             <artifactId>commandapi-shade</artifactId>
-            <version>8.3.1</version>
+            <version>8.4.1</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
