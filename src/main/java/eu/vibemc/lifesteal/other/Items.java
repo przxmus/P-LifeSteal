@@ -127,12 +127,13 @@ public class Items {
             // generate random number between 0 and 100 and check if it is less than the chance
             int random = (int) (Math.random() * 100);
             if (random <= chance) {
-                if (Config.getInt("heartItem.addLimit") == 0 || Config.getInt("heartItem.addLimit") > player.getMaxHealth() + 2) {
+                if (Config.getInt("heartItem.addLimit") == 0 || player.getMaxHealth() + 2 <= Config.getInt("heartItem.addLimit")) {
                     item.setAmount(item.getAmount() - 1);
                     player.setMaxHealth(player.getMaxHealth() + 2);
                     player.sendMessage(Config.getMessage("heartReceived"));
                     player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
                 } else {
+                    player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
                     player.sendMessage(Config.getMessage("maxHeartsFromExtraHeart").replace("${max}", String.valueOf(Config.getInt("heartItem.addLimit") / 2)));
                 }
             } else {
