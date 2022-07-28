@@ -6,6 +6,7 @@ import dev.jorel.commandapi.CommandAPIConfig;
 import eu.vibemc.lifesteal.bans.BanStorageUtil;
 import eu.vibemc.lifesteal.events.*;
 import eu.vibemc.lifesteal.other.*;
+import eu.vibemc.lifesteal.other.expansions.HeartExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -62,6 +63,9 @@ public final class Main extends JavaPlugin {
         }
 
         registerRecipes();
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new HeartExpansion(this).register();
+        }
         UpdateChecker.init();
     }
 
