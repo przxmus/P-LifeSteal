@@ -4,6 +4,7 @@ import dev.jorel.commandapi.CommandAPICommand;
 import eu.vibemc.lifesteal.Main;
 import eu.vibemc.lifesteal.bans.BanStorageUtil;
 import eu.vibemc.lifesteal.other.Config;
+import eu.vibemc.lifesteal.other.Debug;
 import eu.vibemc.lifesteal.other.Items;
 import eu.vibemc.lifesteal.other.LootPopulator;
 import org.bukkit.Bukkit;
@@ -13,7 +14,9 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
+import static eu.vibemc.lifesteal.other.Debug.URL;
 import static eu.vibemc.lifesteal.other.Items.Recipes.registerRecipes;
 import static eu.vibemc.lifesteal.other.Items.Recipes.unregisterRecipes;
 
@@ -44,15 +47,26 @@ public class MainCommands {
                 });
     }
 
+
     public static CommandAPICommand getDebugInfoCommand() {
         return new CommandAPICommand("debug")
                 .withPermission("lifesteal.debug")
                 .withShortDescription("Debug command.")
                 .executes((sender, args) -> {
-                    sender.sendMessage("§aDebug Info:");
-                    sender.sendMessage("§6§lLS Version: §e" + Main.getInstance().getDescription().getVersion());
-                    sender.sendMessage("§6§lCore: §e" + Bukkit.getServer().getVersion());
-                    sender.sendMessage("§6§lAPI Version: §e" + Bukkit.getBukkitVersion());
+
+                    Debug.postDebug(Debug.makeDebug(Main.getInstance())).whenComplete((key, exception) -> {
+                        if (exception != null) {
+                            Main.getInstance().getLogger().log(Level.WARNING, "Failed to post Debug Info.", exception);
+
+                            sender.sendMessage("§cFailed to post Debug Info, check console.");
+                            return;
+                        }
+
+                        sender.sendMessage("§aDebug Info Link: §e§l" + URL + key);
+                    });
+
+
+
 //                    File config = new File(Main.getInstance().getDataFolder(), "config.yml");
 //                    // make bukkit async
 //                    Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
