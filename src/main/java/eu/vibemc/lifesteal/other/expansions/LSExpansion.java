@@ -6,11 +6,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 
-public class HeartExpansion extends PlaceholderExpansion {
+public class LSExpansion extends PlaceholderExpansion {
 
     private final Main plugin;
 
-    public HeartExpansion(Main plugin) {
+    public LSExpansion(Main plugin) {
         this.plugin = plugin;
     }
 
