@@ -118,3 +118,7 @@ messages:
   urNotPlayer: "&c&lYou have to be a player to use this."
   featureDisabled: "&c&lThis feature is disabled."
   heartWithdrawn: "&a&lYou've withdrawn an heart."
+
+placeholder-api:
+  banned-text: "&c&lBanned."
+  not-banned-text: "&a&lNot Banned."
