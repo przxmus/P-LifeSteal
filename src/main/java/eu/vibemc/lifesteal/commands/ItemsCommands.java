@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 public class ItemsCommands {
     public static CommandAPICommand getAllItemsCommands() {
         return new CommandAPICommand("give")
+                .withPermission("lifesteal.give")
                 .withShortDescription("Gives you specified item.")
                 .withSubcommand(ItemsCommands.getGiveReviveBookCommand())
                 .withSubcommand(ItemsCommands.getGiveExtraHeartCommand());

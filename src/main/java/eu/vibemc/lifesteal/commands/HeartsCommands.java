@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 public class HeartsCommands {
     public static CommandAPICommand getAllHeartsCommands() {
         return new CommandAPICommand("hearts")
+                .withPermission("lifesteal.heart")
                 .withShortDescription("Command to manage hearts.")
                 .withSubcommand(HeartsCommands.getCheckHeartsCommand())
                 .withSubcommand(HeartsCommands.getSetHeartsCommand())
