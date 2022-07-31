@@ -23,10 +23,9 @@ public class MainCommands {
                 .withShortDescription("Main LifeSteal command.")
                 .withAliases("ls", "pls", "p-ls", "plifesteal", "p-lifesteal")
                 .executes((sender, args) -> {
-                    sender.sendMessage("§aP-LifeSteal");
-                    sender.sendMessage("§aCreated by §6§ldevPrzemuS");
-                    sender.sendMessage("§6§lhttps://github.com/dewPrzemuS/P-LifeSteal");
-                    sender.sendMessage("§6§lhttps://www.spigotmc.org/resources/p-lifesteal.101967/");
+                    sender.sendMessage("§aP-LifeSteal §a§l" + Main.getInstance().getDescription().getVersion());
+                    sender.sendMessage("§aCreated by §e§ldevPrzemuS");
+                    sender.sendMessage("§6§lhttps://www.spigotmc.org/resources/101967/");
                 })
                 .withSubcommand(MainCommands.getWithdrawCommand())
                 .withSubcommand(MainCommands.getHelpCommand())
