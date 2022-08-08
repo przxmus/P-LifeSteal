@@ -70,6 +70,19 @@ public class Items {
                     OfflinePlayer target = Main.getInstance().getServer().getOfflinePlayer(clickedItem.getItemMeta().getDisplayName().substring(4));
                     try {
                         if (BanStorageUtil.deleteBan(target.getUniqueId())) {
+                            if (Config.getString("custom-commands.mode").equalsIgnoreCase("enabled")) {
+                                List<String> commands = Config.getStringList("custom-commands.onRevive");
+                                for (String command : commands) {
+                                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command.replace("%reviving%", player.getName()).replace("%revived%", target.getName()));
+                                }
+                                return;
+                            }
+                            if (Config.getString("custom-commands.mode").equalsIgnoreCase("both")) {
+                                List<String> commands = Config.getStringList("custom-commands.onRevive");
+                                for (String command : commands) {
+                                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command.replace("%reviving%", player.getName()).replace("%revived%", target.getName()));
+                                }
+                            }
                             player.sendMessage(Config.getMessage("playerRevived").replace("${player}", target.getName()));
                             player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 100, 1);
                             player.getItemInHand().setAmount(player.getItemInHand().getAmount() - 1);

@@ -22,6 +22,19 @@ public class BanStorageUtil {
         if (getBan(player.getUniqueId()) != null) {
             return null;
         }
+        if (Config.getString("custom-commands.mode").equalsIgnoreCase("enabled")) {
+            List<String> commands = Config.getStringList("custom-commands.onBan");
+            for (String command : commands) {
+                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command.replace("%player%", player.getName()));
+            }
+            return null;
+        }
+        if (Config.getString("custom-commands.mode").equalsIgnoreCase("both")) {
+            List<String> commands = Config.getStringList("custom-commands.onBan");
+            for (String command : commands) {
+                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command.replace("%player%", player.getName()));
+            }
+        }
         Ban createdBan;
         if (Config.getInt("banTime") > 0) {
             int banTime = Config.getInt("banTime") * 60;
