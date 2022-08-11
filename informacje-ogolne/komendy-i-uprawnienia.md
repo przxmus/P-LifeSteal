@@ -9,7 +9,7 @@ description: Tabela z wszystkimi komendami, ich opisem i wymaganym uprawnieniem.
 {% endhint %}
 
 {% hint style="warning" %}
-**Nie** należy wpisywać komend z podanymi w nich <mark style="color:orange;">**nawiasami**</mark> lub <mark style="color:orange;">**podobnymi znakami**</mark>. _**Oznaczają one część komendy w której musisz wpisać wartość odpowiadającą twoim potrzebom.**_
+**Nie** należy wpisywać komend z podanymi w nich <mark style="color:orange;">**nawiasami**</mark> lub <mark style="color:purple;">**podobnymi**</mark>** **<mark style="color:blue;">**znakami**</mark>. _**Oznaczają one część komendy w której musisz wpisać wartość odpowiadającą twoim potrzebom.**_
 {% endhint %}
 
 |                                                                                                      Komenda                                                                                                      |                                                                                                                Wyjaśnienie                                                                                                               |          Wymagane uprawnienie         |
