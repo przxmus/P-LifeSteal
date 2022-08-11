@@ -5,7 +5,7 @@ description: Table with all commands, explanations and required permissions.
 # Commands and permissions
 
 {% hint style="info" %}
-You can replace main command `/lifesteal` with its replacements, i.e. `/ls`, `/pls`, `/p-ls`, `/plifesteal` or `/p-lifesteal`.
+You **can replace** main command `/lifesteal` with its replacements, i.e. `/ls`, `/pls`, `/p-ls`, `/plifesteal` or `/p-lifesteal`.
 {% endhint %}
 
 {% hint style="warning" %}
