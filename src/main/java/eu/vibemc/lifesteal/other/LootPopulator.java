@@ -41,7 +41,7 @@ public class LootPopulator extends BlockPopulator {
             Inventory inventory = chestState.getBlockInventory();
             this.modifyInventory(inventory, chunk);
         }
-        
+
     }
 
     public void modifyInventory(final Inventory inventory,
