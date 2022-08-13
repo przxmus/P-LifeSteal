@@ -41,6 +41,7 @@ public class LootPopulator extends BlockPopulator {
             Inventory inventory = chestState.getBlockInventory();
             this.modifyInventory(inventory, chunk);
         }
+        
     }
 
     public void modifyInventory(final Inventory inventory,
@@ -52,10 +53,10 @@ public class LootPopulator extends BlockPopulator {
                     int random = (int) (Math.random() * 100);
                     Main.getInstance().getConfig().getConfigurationSection("loot.worlds").getKeys(false).forEach(worldName -> {
                         if (worldName.equals(chunk.getWorld().getName())) {
-                            if (random <= Config.getInt("loot.worlds." + worldName + ".chanceForHeartToGenerate")) {
+                            if (random > Config.getInt("loot.worlds." + worldName + ".chanceForHeartToGenerate")) {
                                 inventory.addItem(Items.ExtraHeart.getExtraHeart(Config.getInt("loot.worlds." + worldName + ".heartAddChance")));
                             }
-                            if (random <= Config.getInt("loot.worlds." + worldName + ".chanceForReviveBookToGenerate")) {
+                            if (random > Config.getInt("loot.worlds." + worldName + ".chanceForReviveBookToGenerate")) {
                                 inventory.addItem(Items.ReviveBook.getReviveBook());
                             }
                         }

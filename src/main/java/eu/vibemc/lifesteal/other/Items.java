@@ -139,7 +139,7 @@ public class Items {
             int chance = ExtraHeart.getChance(item);
             // generate random number between 0 and 100 and check if it is less than the chance
             int random = (int) (Math.random() * 100);
-            if (random <= chance) {
+            if (chance > random) {
                 if (Config.getInt("heartItem.addLimit") == 0 || player.getMaxHealth() + 2 <= Config.getInt("heartItem.addLimit")) {
                     item.setAmount(item.getAmount() - 1);
                     player.setMaxHealth(player.getMaxHealth() + 2);
@@ -153,7 +153,7 @@ public class Items {
                 item.setAmount(item.getAmount() - 1);
                 // create another chance
                 int secondRandom = (int) (Math.random() * 100);
-                if (secondRandom <= Config.getInt("heartItem.loseChance")) {
+                if (secondRandom >= Config.getInt("heartItem.loseChance")) {
                     player.sendMessage(Config.getMessage("heartFailure"));
                     player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
                 } else {
