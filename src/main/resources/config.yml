@@ -88,9 +88,9 @@ messages:
   heartReceived: "&a&lYou've received an extra heart!"
   heartGained: "&a&lYou've gained a heart!"
   heartFailure: "&4&lYou didn't get an extra heart."
-  heartLost: "&4&lYou've lost an heart."
-  noMoreHeartsBan: "&c&lYou've lost all your lives."
-  bannedNoMoreHeartsBroadcast: "&c&l${player} &4&lhas lost all his lives."
+  heartLost: "&4&lYou've lost a heart."
+  noMoreHeartsBan: "&c&lYou've lost all your hearts."
+  bannedNoMoreHeartsBroadcast: "&c&l${player} &4&lhas lost all of their hearts."
   configReloaded: "&aConfig reloaded."
   recipesReloaded: "&aRecipes reloaded."
   lootReloaded: "&aLoot settings reloaded."
@@ -117,7 +117,7 @@ messages:
   nextPageLore: "&aClick to move forward to page ${page}."
   urNotPlayer: "&c&lYou have to be a player to use this."
   featureDisabled: "&c&lThis feature is disabled."
-  heartWithdrawn: "&a&lYou've withdrawn an heart."
+  heartWithdrawn: "&a&lYou've withdrawn a heart."
 
 placeholder-api:
   banned-text: "&c&lBanned."
