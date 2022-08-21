@@ -73,14 +73,14 @@ public class Items {
                             if (Config.getString("custom-commands.mode").equalsIgnoreCase("enabled")) {
                                 List<String> commands = Config.getStringList("custom-commands.onRevive");
                                 for (String command : commands) {
-                                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command.replace("%reviving%", player.getName()).replace("%revived%", target.getName()));
+                                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command.replace("%reviving%", player.getName()).replace("%revived%", target.getName()).replace("${reviving}", player.getName()).replace("${revived}", target.getName()));
                                 }
                                 return;
                             }
                             if (Config.getString("custom-commands.mode").equalsIgnoreCase("both")) {
                                 List<String> commands = Config.getStringList("custom-commands.onRevive");
                                 for (String command : commands) {
-                                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command.replace("%reviving%", player.getName()).replace("%revived%", target.getName()));
+                                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command.replace("%reviving%", player.getName()).replace("%revived%", target.getName()).replace("${reviving}", player.getName()).replace("${revived}", target.getName()));
                                 }
                             }
                             player.sendMessage(Config.getMessage("playerRevived").replace("${player}", target.getName()));

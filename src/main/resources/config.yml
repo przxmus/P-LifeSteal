@@ -126,6 +126,6 @@ placeholder-api:
 custom-commands:
   mode: "disabled"
   onBan:
-    - "example command"
+    - "tellraw @a "${player} got banned!"
   onRevive:
-    - "example command"
+    - "tellraw @a "${revived} got revived by ${reviving}!"
