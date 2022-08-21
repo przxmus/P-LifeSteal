@@ -2,10 +2,8 @@ package eu.vibemc.lifesteal.other.expansions;
 
 import eu.vibemc.lifesteal.Main;
 import eu.vibemc.lifesteal.bans.BanStorageUtil;
-import eu.vibemc.lifesteal.bans.models.Ban;
 import eu.vibemc.lifesteal.other.Config;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
@@ -42,24 +40,20 @@ public class LSExpansion extends PlaceholderExpansion {
 
     @Override
     public String onRequest(OfflinePlayer player, String params) {
-        if (params.startsWith("hearts_")) {
+        if (params.equalsIgnoreCase("hearts")) {
             try {
-                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(params.substring(7));
-                // if offline player exists
-                if (offlinePlayer != null) {
-                    return String.valueOf((int) offlinePlayer.getPlayer().getMaxHealth() / 2);
+                if (player != null) {
+                    return String.valueOf((int) player.getPlayer().getMaxHealth() / 2);
                 }
             } catch (NullPointerException ignored) {
 
             }
 
         }
-        if (params.startsWith("health_")) {
+        if (params.equalsIgnoreCase("health")) {
             try {
-                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(params.substring(7));
-                // if offline player exists
-                if (offlinePlayer != null) {
-                    return String.valueOf((int) offlinePlayer.getPlayer().getMaxHealth());
+                if (player != null) {
+                    return String.valueOf((int) player.getPlayer().getMaxHealth());
                 }
             } catch (NullPointerException ignored) {
 
@@ -67,15 +61,12 @@ public class LSExpansion extends PlaceholderExpansion {
 
         }
 
-        if (params.startsWith("banned_")) {
+        if (params.equalsIgnoreCase("banned")) {
             try {
-                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(params.substring(7));
-                // if offline player exists
-                if (offlinePlayer != null) {
-                    if (BanStorageUtil.getBan(offlinePlayer.getUniqueId()) != null) {
+                if (player != null) {
+                    if (BanStorageUtil.getBan(player.getUniqueId()) != null) {
                         return ChatColor.translateAlternateColorCodes('&', Config.getString("placeholder-api.banned-text"));
-                    }
-                    else {
+                    } else {
                         return ChatColor.translateAlternateColorCodes('&', Config.getString("placeholder-api.not-banned-text"));
                     }
                 }
