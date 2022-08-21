@@ -105,10 +105,17 @@ public class MainCommands {
                             }
                         } else {
                             player.setMaxHealth(player.getMaxHealth() - 2);
-                            player.getInventory().addItem(Items.ExtraHeart.getExtraHeart(100));
-                            player.updateInventory();
-                            player.sendMessage(Config.getMessage("heartWithdrawn"));
-                            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
+                            // check if player's inventory isnt full
+                            if (player.getInventory().firstEmpty() == -1) {
+                                player.getWorld().dropItem(player.getLocation(), Items.ExtraHeart.getExtraHeart(100));
+                                player.sendMessage(Config.getMessage("heartWithdrawn"));
+                                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
+                            } else {
+                                player.getInventory().addItem(Items.ExtraHeart.getExtraHeart(100));
+                                player.updateInventory();
+                                player.sendMessage(Config.getMessage("heartWithdrawn"));
+                                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
+                            }
                         }
 
                     } else {
