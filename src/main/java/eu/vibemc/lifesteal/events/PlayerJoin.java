@@ -4,6 +4,7 @@ import eu.vibemc.lifesteal.Main;
 import eu.vibemc.lifesteal.other.Config;
 import eu.vibemc.lifesteal.other.UpdateChecker;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -32,6 +33,14 @@ public class PlayerJoin implements Listener {
                     }
                 }
             });
+        }
+        // get which value is bigger from Config.getInt("heartItem.addLimit") and Config.getInt("killHeartLimit")
+        int max = Config.getInt("heartItem.addLimit") > Config.getInt("killHeartLimit") ? Config.getInt("heartItem.addLimit") : Config.getInt("killHeartLimit");
+        // if player's max health is bigger than max, set max health to max
+        if (player.getMaxHealth() > max) {
+            player.setMaxHealth(max);
+            player.sendMessage(Config.getMessage("abuseDetected"));
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 100, 1);
         }
     }
 }

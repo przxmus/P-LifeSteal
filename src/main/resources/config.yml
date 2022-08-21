@@ -117,6 +117,7 @@ messages:
   urNotPlayer: "&c&lYou have to be a player to use this."
   featureDisabled: "&c&lThis feature is disabled."
   heartWithdrawn: "&a&lYou've withdrawn a heart."
+  abuseDetected: "&c&lOur system has detected that your amount of hearts is higher than the maximum. We've reverted your hearts back to the normal value."
 
 placeholder-api:
   banned-text: "&c&lBanned."
@@ -125,6 +126,6 @@ placeholder-api:
 custom-commands:
   mode: "disabled"
   onBan:
-    - "tellraw @a "${player} got banned!"
+    - "tellraw @a ${player} got banned!"
   onRevive:
-    - "tellraw @a "${revived} got revived by ${reviving}!"
+    - "tellraw @a ${revived} got revived by ${reviving}!"
