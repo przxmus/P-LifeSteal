@@ -86,7 +86,7 @@ loot:
 
 messages:
   heartReceived: "&a&lYou've received an extra heart!"
-  heartGained: "&a&lYou've gained a heart!"
+  heartGained: "&a&lYou've gained a heart for killing ${player}!"
   heartFailure: "&4&lYou didn't get an extra heart."
   heartLost: "&4&lYou've lost a heart."
   noMoreHeartsBan: "&c&lYou've lost all your hearts."
@@ -103,12 +103,11 @@ messages:
   heartCheck: "&e&l${player} has ${amount}x hearts."
   banRemoved: "&a&lYou've removed ban from ${player}."
   playerNotFound: "&c&lPlayer not found."
-  playerNotBanned: "&c&lThis player is not banned."
-  playerNotDead: "&c&lThis player has not been eliminated, so he cannot be revived."
+  playerNotBanned: "&c&l${player} is not banned."
+  playerNotDead: "&c&l${player} has not been eliminated, so he cannot be revived."
   playerRevived: "&a&lYou have revived &6&l${player}&a&l!"
   maxHeartsFromExtraHeart: "&c&lYou can't get more than ${max}x hearts from an extra heart."
   maxHearts: "&c&lYou can't get more than ${max}x hearts."
-  reviveBookQuestion: "&6&lWho do you want to revive?\n&7&oType the player's name in the chat."
   previousPage: "&a&l← Previous Page"
   previousPageLore: "&aClick to move back to page ${page}."
   currentPage: "&7&lPage ${currentPage} of ${maxPage}"

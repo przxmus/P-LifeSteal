@@ -37,7 +37,7 @@ public class BansCommands {
                                 sender.sendMessage(Config.getMessage("banRemoved").replace("${player}", player.getName()));
 
                             } else {
-                                sender.sendMessage(Config.getMessage("playerNotBanned"));
+                                sender.sendMessage(Config.getMessage("playerNotBanned").replace("${player}", player.getName()));
                             }
                         }
                     } catch (IOException e) {

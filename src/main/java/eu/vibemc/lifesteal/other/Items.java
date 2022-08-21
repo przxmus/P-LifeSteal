@@ -89,7 +89,7 @@ public class Items {
                             player.updateInventory();
                             player.closeInventory();
                         } else {
-                            player.sendMessage(Config.getMessage("playerNotDead"));
+                            player.sendMessage(Config.getMessage("playerNotDead").replace("${player}", target.getName()));
                             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
                         }
                     } catch (final IOException ex) {
