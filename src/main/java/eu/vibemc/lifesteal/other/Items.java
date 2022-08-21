@@ -5,6 +5,7 @@ import com.samjakob.spigui.buttons.SGButton;
 import eu.vibemc.lifesteal.Main;
 import eu.vibemc.lifesteal.bans.BanStorageUtil;
 import org.bukkit.*;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -142,7 +143,7 @@ public class Items {
             if (chance > random) {
                 if (Config.getInt("heartItem.addLimit") == 0 || player.getMaxHealth() + 2 <= Config.getInt("heartItem.addLimit")) {
                     item.setAmount(item.getAmount() - 1);
-                    player.setMaxHealth(player.getMaxHealth() + 2);
+                    player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getMaxHealth() + 2);
                     player.sendMessage(Config.getMessage("heartReceived"));
                     player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
                 } else {
@@ -160,7 +161,7 @@ public class Items {
                     if (player.getMaxHealth() - 2 <= 0) {
                         BanStorageUtil.createBan(player);
                     } else {
-                        player.setMaxHealth(player.getMaxHealth() - 2);
+                        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getMaxHealth() - 2);
                         player.sendMessage(Config.getMessage("heartLost"));
                         player.playSound(player.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 100, 2);
                     }

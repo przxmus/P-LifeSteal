@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
@@ -104,7 +105,7 @@ public class MainCommands {
                                 throw new RuntimeException(e);
                             }
                         } else {
-                            player.setMaxHealth(player.getMaxHealth() - 2);
+                            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getMaxHealth() - 2);
                             // check if player's inventory isnt full
                             if (player.getInventory().firstEmpty() == -1) {
                                 player.getWorld().dropItem(player.getLocation(), Items.ExtraHeart.getExtraHeart(100));

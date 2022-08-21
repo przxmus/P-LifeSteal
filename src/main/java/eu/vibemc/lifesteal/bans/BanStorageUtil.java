@@ -6,6 +6,7 @@ import eu.vibemc.lifesteal.bans.models.Ban;
 import eu.vibemc.lifesteal.other.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
 import java.io.*;
@@ -49,7 +50,7 @@ public class BanStorageUtil {
             saveBans();
             createdBan = ban;
         }
-        player.setMaxHealth(Config.getInt("reviveHeartAmount"));
+        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(Config.getInt("reviveHeartAmount"));
         Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
             if (player.isOnline()) {
                 if (Config.getBoolean("banOn0Hearts")) {

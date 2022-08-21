@@ -4,6 +4,7 @@ import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.arguments.IntegerArgument;
 import dev.jorel.commandapi.arguments.PlayerArgument;
 import eu.vibemc.lifesteal.other.Config;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
 public class HeartsCommands {
@@ -25,7 +26,7 @@ public class HeartsCommands {
                 .executes((sender, args) -> {
                     Player player = (Player) args[0];
                     int amount = (int) args[1];
-                    player.setMaxHealth(player.getMaxHealth() + amount);
+                    player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getMaxHealth() + amount);
                     player.sendMessage(Config.getMessage("heartAdded").replace("${amount}", String.valueOf(amount / 2)));
                     sender.sendMessage(Config.getMessage("heartAddedAdmin").replace("${amount}", String.valueOf(amount / 2)).replace("${player}", player.getName()));
                 });
@@ -39,7 +40,7 @@ public class HeartsCommands {
                 .executes((sender, args) -> {
                     Player player = (Player) args[0];
                     int amount = (int) args[1];
-                    player.setMaxHealth(amount);
+                    player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(amount);
                     player.sendMessage(Config.getMessage("heartSetted").replace("${amount}", String.valueOf(amount / 2)));
                     sender.sendMessage(Config.getMessage("heartSettedAdmin").replace("${amount}", String.valueOf(amount / 2)).replace("${player}", player.getName()));
 
@@ -54,7 +55,7 @@ public class HeartsCommands {
                 .executes((sender, args) -> {
                     Player player = (Player) args[0];
                     int amount = (int) args[1];
-                    player.setMaxHealth(player.getMaxHealth() - amount);
+                    player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getMaxHealth() - amount);
                     player.sendMessage(Config.getMessage("heartRemoved").replace("${amount}", String.valueOf(amount / 2)));
                     sender.sendMessage(Config.getMessage("heartRemovedAdmin").replace("${amount}", String.valueOf(amount / 2)).replace("${player}", player.getName()));
 
