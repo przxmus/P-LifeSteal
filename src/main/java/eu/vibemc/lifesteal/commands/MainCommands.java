@@ -35,6 +35,7 @@ public class MainCommands {
                 .withSubcommand(MainCommands.getHelpCommand())
                 .withSubcommand(MainCommands.getReloadCommand())
                 .withSubcommand(MainCommands.getDebugInfoCommand());
+
     }
 
     private static CommandAPICommand getHelpCommand() {
@@ -47,7 +48,6 @@ public class MainCommands {
                     sender.sendMessage("§6§lhttps://discord.gg/8sjwaQTHGC/");
                 });
     }
-
 
     public static CommandAPICommand getDebugInfoCommand() {
         return new CommandAPICommand("debug")
@@ -65,7 +65,6 @@ public class MainCommands {
 
                         sender.sendMessage("§aDebug Info Link: §e§l" + URL + key);
                     });
-
 
 
 //                    File config = new File(Main.getInstance().getDataFolder(), "config.yml");
@@ -94,7 +93,7 @@ public class MainCommands {
                             sender.sendMessage(Config.getMessage("featureDisabled"));
                             return;
                         }
-                        if (player.getMaxHealth() - 2 <= 0) {
+                        if (player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() - 2 <= 0) {
                             try {
                                 player.getInventory().addItem(Items.ExtraHeart.getExtraHeart(100));
                                 player.updateInventory();
@@ -105,7 +104,7 @@ public class MainCommands {
                                 throw new RuntimeException(e);
                             }
                         } else {
-                            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getMaxHealth() - 2);
+                            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() - 2);
                             // check if player's inventory isnt full
                             if (player.getInventory().firstEmpty() == -1) {
                                 player.getWorld().dropItem(player.getLocation(), Items.ExtraHeart.getExtraHeart(100));

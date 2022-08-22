@@ -38,8 +38,8 @@ public class PlayerJoin implements Listener {
         // get which value is bigger from Config.getInt("heartItem.addLimit") and Config.getInt("killHeartLimit")
         int max = Config.getInt("heartItem.addLimit") > Config.getInt("killHeartLimit") ? Config.getInt("heartItem.addLimit") : Config.getInt("killHeartLimit");
         // if player's max health is bigger than max, set max health to max
-        if (max > 0 && player.getMaxHealth() > max) {
-            System.out.println(player.getMaxHealth() + " > " + max);
+        if (max > 0 && player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() > max) {
+            System.out.println(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() + " > " + max);
             player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(max);
             player.sendMessage(Config.getMessage("abuseDetected"));
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 100, 1);

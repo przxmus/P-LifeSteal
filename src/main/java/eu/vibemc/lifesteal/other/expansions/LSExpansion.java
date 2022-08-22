@@ -6,6 +6,7 @@ import eu.vibemc.lifesteal.other.Config;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.attribute.Attribute;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -43,7 +44,7 @@ public class LSExpansion extends PlaceholderExpansion {
         if (params.equalsIgnoreCase("hearts")) {
             try {
                 if (player != null) {
-                    return String.valueOf((int) player.getPlayer().getMaxHealth() / 2);
+                    return String.valueOf((int) player.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() / 2);
                 }
             } catch (NullPointerException ignored) {
 
@@ -53,7 +54,7 @@ public class LSExpansion extends PlaceholderExpansion {
         if (params.equalsIgnoreCase("health")) {
             try {
                 if (player != null) {
-                    return String.valueOf((int) player.getPlayer().getMaxHealth());
+                    return String.valueOf((int) player.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
                 }
             } catch (NullPointerException ignored) {
 
