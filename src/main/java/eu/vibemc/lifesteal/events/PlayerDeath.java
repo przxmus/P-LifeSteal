@@ -15,25 +15,30 @@ public class PlayerDeath implements Listener {
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) throws IOException {
-        Player player = e.getEntity();
-        Player killer = player.getKiller();
+        Player killed = e.getEntity();
+        Player killer = killed.getKiller();
         if (Config.getBoolean("removeHeartOnlyIfKilledByPlayer")) {
             if (killer != null) {
-                if (player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() - 2 <= 0) {
-                    BanStorageUtil.createBan(player);
+                if (Config.getBoolean("security.alt-farming.ip-check") == true && killed.getAddress().getAddress() == killer.getAddress().getAddress() && killer.hasPermission("lifesteal.security.ip-check-bypass") == killed.hasPermission("lifesteal.security.ip-check-bypass")) {
+                    killed.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
+                    killer.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
+                    return;
+                }
+                if (killed.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() - 2 <= 0) {
+                    BanStorageUtil.createBan(killed);
                 } else {
-                    // remove 2 from max health of killed player
-                    player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() - 2);
-                    // send actionbar to killed player
-                    player.sendMessage(Config.getMessage("heartLost"));
-                    // send thunder sound to killed player
-                    player.playSound(player.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 100, 2);
+                    // remove 2 from max health of killed killed
+                    killed.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(killed.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() - 2);
+                    // send actionbar to killed killed
+                    killed.sendMessage(Config.getMessage("heartLost"));
+                    // send thunder sound to killed killed
+                    killed.playSound(killed.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 100, 2);
                 }
                 if (Config.getInt("killHeartLimit") == 0 || killer.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() + 2 <= Config.getInt("killHeartLimit")) {
                     // add 2 to max health of killer
                     killer.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(killer.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() + 2);
                     // send actionbar to killer
-                    killer.sendMessage(Config.getMessage("heartGained").replace("${player}", player.getName()));
+                    killer.sendMessage(Config.getMessage("heartGained").replace("${player}", killed.getName()));
                     // send level up sound to killer
                     killer.playSound(killer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
                 } else {
@@ -44,22 +49,29 @@ public class PlayerDeath implements Listener {
                 return;
             }
         } else {
-            if (player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() - 2 <= 0) {
-                BanStorageUtil.createBan(player);
+            if (killer != null) {
+                if (Config.getBoolean("security.alt-farming.ip-check") == true && killed.getAddress().getAddress() == killer.getAddress().getAddress() && killer.hasPermission("lifesteal.security.ip-check-bypass") == killed.hasPermission("lifesteal.security.ip-check-bypass")) {
+                    killed.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
+                    killer.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
+                    return;
+                }
+            }
+            if (killed.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() - 2 <= 0) {
+                BanStorageUtil.createBan(killed);
             } else {
-                // remove 2 from max health of killed player
-                player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() - 2);
-                // send actionbar to killed player
-                player.sendMessage(Config.getMessage("heartLost"));
-                // send thunder sound to killed player
-                player.playSound(player.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 100, 2);
+                // remove 2 from max health of killed killed
+                killed.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(killed.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() - 2);
+                // send actionbar to killed killed
+                killed.sendMessage(Config.getMessage("heartLost"));
+                // send thunder sound to killed killed
+                killed.playSound(killed.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 100, 2);
             }
             if (killer != null) {
                 if (Config.getInt("killHeartLimit") == 0 || killer.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() + 2 <= Config.getInt("killHeartLimit")) {
                     // add 2 to max health of killer
                     killer.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(killer.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() + 2);
                     // send actionbar to killer
-                    killer.sendMessage(Config.getMessage("heartGained").replace("${player}", player.getName()));
+                    killer.sendMessage(Config.getMessage("heartGained").replace("${player}", killed.getName()));
                     // send level up sound to killer
                     killer.playSound(killer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
                 } else {
