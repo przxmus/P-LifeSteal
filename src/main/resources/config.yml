@@ -137,4 +137,5 @@ custom-commands:
 security:
   alt-farming:
     ip-check: true
-    last-kill-check: false
+  limits:
+    auto-revert: true
