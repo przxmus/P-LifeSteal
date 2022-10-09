@@ -13,6 +13,8 @@ heartItem:
   loseChance: 50
   addLimit: 0
   withdraw-enabled: true
+  drop:
+    mode: "never" # never, limit_exceeded, always
 
 reviveBook:
   enabled: true
