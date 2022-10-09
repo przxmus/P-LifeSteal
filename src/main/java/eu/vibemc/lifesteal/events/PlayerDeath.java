@@ -47,8 +47,13 @@ public class PlayerDeath implements Listener {
                         killer.playSound(killer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
                     }
                 } else {
-                    killer.playSound(killer.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
-                    killer.sendMessage(Config.getMessage("maxHearts").replace("${max}", String.valueOf(Config.getInt("killHeartLimit") / 2)));
+                    if (Config.getString("heartItem.drop.mode").equalsIgnoreCase("always") || Config.getString("heartItem.drop.mode").equalsIgnoreCase("limit_exceeded")) {
+                        killed.getWorld().dropItemNaturally(killed.getLocation(), Items.ExtraHeart.getExtraHeart(100));
+                        killer.sendMessage(Config.getMessage("maxHeartsDropped").replace("${player}", killed.getName()));
+                    } else {
+                        killer.playSound(killer.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
+                        killer.sendMessage(Config.getMessage("maxHearts").replace("${max}", String.valueOf(Config.getInt("killHeartLimit") / 2)));
+                    }
                 }
             } else {
                 return;
@@ -89,8 +94,13 @@ public class PlayerDeath implements Listener {
                         killer.playSound(killer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
                     }
                 } else {
-                    killer.playSound(killer.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
-                    killer.sendMessage(Config.getMessage("maxHearts").replace("${max}", String.valueOf(Config.getInt("killHeartLimit") / 2)));
+                    if (Config.getString("heartItem.drop.mode").equalsIgnoreCase("always") || Config.getString("heartItem.drop.mode").equalsIgnoreCase("limit_exceeded")) {
+                        killed.getWorld().dropItemNaturally(killed.getLocation(), Items.ExtraHeart.getExtraHeart(100));
+                        killer.sendMessage(Config.getMessage("maxHeartsDropped").replace("${player}", killed.getName()));
+                    } else {
+                        killer.playSound(killer.getLocation(), Sound.ENTITY_VILLAGER_NO, 100, 1);
+                        killer.sendMessage(Config.getMessage("maxHearts").replace("${max}", String.valueOf(Config.getInt("killHeartLimit") / 2)));
+                    }
                 }
             }
         }
