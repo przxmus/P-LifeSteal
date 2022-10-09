@@ -20,10 +20,30 @@ public class PlayerDeath implements Listener {
         Player killer = killed.getKiller();
         if (Config.getBoolean("removeHeartOnlyIfKilledByPlayer")) {
             if (killer != null) {
-                if (Config.getBoolean("security.alt-farming.ip-check") == true && killed.getAddress().getAddress() == killer.getAddress().getAddress() && killer.hasPermission("lifesteal.security.ip-check-bypass") == killed.hasPermission("lifesteal.security.ip-check-bypass")) {
-                    killed.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
-                    killer.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
-                    return;
+                if (Config.getBoolean("security.alt-farming.ip-check")) {
+                    if (killed.getAddress().getAddress().toString().equalsIgnoreCase(killer.getAddress().getAddress().toString())) {
+                        if (killed.hasPermission("lifesteal.security.ip-check-bypass")) {
+                            if (!killer.hasPermission("lifesteal.security.ip-check-bypass")) {
+                                killed.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
+                                killer.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
+                                return;
+                            }
+                        }
+                        if (killer.hasPermission("lifesteal.security.ip-check-bypass")) {
+                            if (!killed.hasPermission("lifesteal.security.ip-check-bypass")) {
+                                killed.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
+                                killer.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
+                                return;
+                            }
+                        }
+                        if (!killer.hasPermission("lifesteal.security.ip-check-bypass")) {
+                            if (!killed.hasPermission("lifesteal.security.ip-check-bypass")) {
+                                killed.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
+                                killer.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
+                                return;
+                            }
+                        }
+                    }
                 }
                 if (killed.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() - 2 <= 0) {
                     BanStorageUtil.createBan(killed);
@@ -60,10 +80,30 @@ public class PlayerDeath implements Listener {
             }
         } else {
             if (killer != null) {
-                if (Config.getBoolean("security.alt-farming.ip-check") == true && killed.getAddress().getAddress() == killer.getAddress().getAddress() && killer.hasPermission("lifesteal.security.ip-check-bypass") == killed.hasPermission("lifesteal.security.ip-check-bypass")) {
-                    killed.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
-                    killer.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
-                    return;
+                if (Config.getBoolean("security.alt-farming.ip-check")) {
+                    if (killed.getAddress().getAddress().toString().equalsIgnoreCase(killer.getAddress().getAddress().toString())) {
+                        if (killed.hasPermission("lifesteal.security.ip-check-bypass")) {
+                            if (!killer.hasPermission("lifesteal.security.ip-check-bypass")) {
+                                killed.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
+                                killer.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
+                                return;
+                            }
+                        }
+                        if (killer.hasPermission("lifesteal.security.ip-check-bypass")) {
+                            if (!killed.hasPermission("lifesteal.security.ip-check-bypass")) {
+                                killed.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
+                                killer.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
+                                return;
+                            }
+                        }
+                        if (!killer.hasPermission("lifesteal.security.ip-check-bypass")) {
+                            if (!killed.hasPermission("lifesteal.security.ip-check-bypass")) {
+                                killed.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
+                                killer.sendMessage(Config.getMessage("altFarmingIgnore").replace("${killed}", killed.getName()));
+                                return;
+                            }
+                        }
+                    }
                 }
             }
             if (killed.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() - 2 <= 0) {
