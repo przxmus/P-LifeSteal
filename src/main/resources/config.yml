@@ -25,6 +25,7 @@ reviveBook:
     - "&6Revives targeted player!"
   skull-lore:
     - "&aPress on the head to revive."
+  unbreakable: false
 
 killHeartLimit: 0
 removeHeartOnlyIfKilledByPlayer: false

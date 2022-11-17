@@ -86,7 +86,9 @@ public class Items {
                             }
                             player.sendMessage(Config.getMessage("playerRevived").replace("${player}", target.getName()));
                             player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 100, 1);
-                            player.getItemInHand().setAmount(player.getItemInHand().getAmount() - 1);
+                            if (!Config.getBoolean("reviveBook.unbreakable")) {
+                                player.getItemInHand().setAmount(player.getItemInHand().getAmount() - 1);
+                            }
                             player.updateInventory();
                             player.closeInventory();
                         } else {
