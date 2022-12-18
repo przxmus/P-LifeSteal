@@ -1,6 +1,7 @@
 package eu.vibemc.lifesteal.commands;
 
 import dev.jorel.commandapi.CommandAPICommand;
+import dev.jorel.commandapi.arguments.IntegerArgument;
 import eu.vibemc.lifesteal.Main;
 import eu.vibemc.lifesteal.bans.BanStorageUtil;
 import eu.vibemc.lifesteal.other.Config;
