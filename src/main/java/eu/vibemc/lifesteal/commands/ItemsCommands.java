@@ -19,9 +19,9 @@ public class ItemsCommands {
         return new CommandAPICommand("extra_heart")
                 .withPermission("lifesteal.give.extraheart")
                 .withArguments(new PlayerArgument("player"), new IntegerArgument("chance_of_success"), new IntegerArgument("amount")).executes((sender, args) -> {
-                    Player player = (Player) args[0];
-                    int chance = (int) args[1];
-                    int amount = (int) args[2];
+                    Player player = (Player) args.get("player");
+                    int chance = (int) args.get("chance_of_success");
+                    int amount = (int) args.get("amount");
                     for (int i = 0; i < amount; i++) {
                         player.getInventory().addItem(Items.ExtraHeart.getExtraHeart(chance));
                         player.updateInventory();
@@ -34,8 +34,8 @@ public class ItemsCommands {
                 .withPermission("lifesteal.give.revivebook")
                 .withArguments(new PlayerArgument("player"), new IntegerArgument("amount")).
                 executes((sender, args) -> {
-                    Player player = (Player) args[0];
-                    int amount = (int) args[1];
+                    Player player = (Player) args.get("player");
+                    int amount = (int) args.get("amount");
                     for (int i = 0; i < amount; i++) {
                         player.getInventory().addItem(Items.ReviveBook.getReviveBook());
                         player.updateInventory();

@@ -28,7 +28,7 @@ public class BansCommands {
                 .withPermission("lifesteal.bans.remove")
                 .withArguments(new OfflinePlayerArgument("player"))
                 .executes((sender, args) -> {
-                    OfflinePlayer player = (OfflinePlayer) args[0];
+                    OfflinePlayer player = (OfflinePlayer) args.get("player");
                     try {
                         if (player.getName() == null) {
                             sender.sendMessage(Config.getMessage("playerNotFound"));

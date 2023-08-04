@@ -2,6 +2,7 @@ package eu.vibemc.lifesteal;
 
 import com.samjakob.spigui.SpiGUI;
 import dev.jorel.commandapi.CommandAPI;
+import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import dev.jorel.commandapi.CommandAPIConfig;
 import eu.vibemc.lifesteal.bans.BanStorageUtil;
 import eu.vibemc.lifesteal.events.*;
@@ -29,7 +30,7 @@ public final class Main extends JavaPlugin {
     @Override
     public void onLoad() {
         Main.instance = this;
-        CommandAPI.onLoad(new CommandAPIConfig().silentLogs(false));
+        CommandAPI.onLoad(new CommandAPIBukkitConfig(this).silentLogs(false));
         try {
             BanStorageUtil.loadBans();
         } catch (IOException e) {
@@ -42,7 +43,7 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         spiGUI = new SpiGUI(this);
-        CommandAPI.onEnable(this);
+        CommandAPI.onEnable();
         Metrics metrics = new Metrics(this, 15176);
 
         getConfig().options().copyDefaults();
