@@ -71,7 +71,7 @@ public class UpdateChecker {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             // make api get request to https://api.spigotmc.org/simple/0.2/index.php?action=getResource&id=101967 then get response json
             try {
-                URL url = new URL("https://api.github.com/repos/dewPrzemuS/P-LifeSteal/releases");
+                URL url = new URL("https://api.github.com/repos/Head-BOB/P-LifeSteal/releases");
                 HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 String response = new String(connection.getInputStream().readAllBytes(), StandardCharsets.UTF_8);

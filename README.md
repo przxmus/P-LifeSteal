@@ -20,7 +20,9 @@
     <img alt="wakatime" src="https://wakatime.com/badge/user/df5da6b0-e47d-4830-9381-6a2157613310/project/18b51dc6-ad4c-4bb0-b15b-b5c36498d6b3.svg?style=for-the-badge"/>
 </p>
 
-## What is it?
+### Updated to work with latest versions of Minecraft.
+
+## What is it? 
 
 P-LifeSteal brings a new game mechanic. When a player dies, he loses one of his hearts, but if he is killed by another
 player, the killer will receive the opponent's heart. The plugin is highly configurable and you can learn more about its
